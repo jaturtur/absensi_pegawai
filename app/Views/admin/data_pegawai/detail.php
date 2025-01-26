@@ -5,7 +5,7 @@
 <div class="card col-md-8">
   <di class="card-body">
     <table class="table">
-    <img width="300px" src="<?= base_url('profile/' . $pegawai['foto']) ?>" alt="">
+    <img style="border-radius: 10px;" width="300px" src="<?= base_url('profile/' . $pegawai['foto']) ?>" alt="">
       <tr>
         <td>NIP</td>
         <td>:</td>

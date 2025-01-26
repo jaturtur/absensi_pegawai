@@ -4,66 +4,94 @@
 
 <div class="card col-md-6">
     <div class="card-body">
-    <form method="POST" action="<?= base_url('admin/lokasi_presensi/store') ?>">
+    <form method="POST" action="<?= base_url('admin/data_pegawai/store') ?>" enctype="multipart/form-data">
+    <?= csrf_field() ?>
 
       <div class="input-style-1">
-         <label>Nama Lokasi</label>
-           <input type="text" class="form-control <?= ($validation->hasError('nama_lokasi')) ? 'is-invalid' : '' ?>" name="nama_lokasi" placeholder="Nama Lokasi" />
-           <div class="invalid-feedback"><?= $validation->getError('nama_lokasi') ?></div>
+         <label>Nama</label>
+           <input type="text" class="form-control <?= ($validation->hasError('nama')) ? 'is-invalid' : '' ?>"name="nama" placeholder="Nama" value="<?= set_value('nama') ?>" />
+           <div class="invalid-feedback"><?= $validation->getError('nama') ?></div>
+          </div>
+
+        
+
+          <div class="input-style-1">
+            <label>Jenis Kelamin</label>
+            <select name="jenis_kelamin" class="form-control <?= ($validation->hasError('jenis_kelamin')) ? 'is-invalid' : '' ?>">
+              <option value="">—Pilih Jenis Kelamin—</option>
+              <option value="Laki-laki">Laki-laki</option>
+             <option value="Perempuan">Perempuan</option>
+           </select>
+            <div class="invalid-feedback"><?= $validation->getError('jenis_kelamin') ?></div>
           </div>
 
           <div class="input-style-1">
-         <label>Alamat Lokasi</label>
-           <textarea name="alamat_lokasi" class="form-control <?= ($validation->hasError('alamat_lokasi')) ? 'is-invalid' : '' ?>" cols="30" rows="5" placeholder="Alamat Lokasi"></textarea>
-           <div class="invalid-feedback"><?= $validation->getError('alamat_lokasi') ?></div>
+         <label>Alamat</label>
+           <textarea name="alamat" class="form-control <?= ($validation->hasError('alamat')) ? 'is-invalid' : '' ?>" cols="30" rows="5" placeholder="Alamat"></textarea>
+           <div class="invalid-feedback"><?= $validation->getError('alamat') ?></div>
           </div>
 
           <div class="input-style-1">
-         <label>Tipe Lokasi</label>
-           <input type="text" class="form-control <?= ($validation->hasError('tipe_lokasi')) ? 'is-invalid' : '' ?>" name="tipe_lokasi" placeholder="Tipe Lokasi" />
-           <div class="invalid-feedback"><?= $validation->getError('tipe_lokasi') ?></div>
+         <label>No. Handphone</label>
+           <input type="number" class="form-control <?= ($validation->hasError('no_handphone')) ? 'is-invalid' : '' ?>" name="no_handphone" placeholder="No Handphone" />
+           <div class="invalid-feedback"><?= $validation->getError('no_handphone') ?></div>
           </div>
 
           <div class="input-style-1">
-         <label>Latitude</label>
-           <input type="text" class="form-control <?= ($validation->hasError('latitude')) ? 'is-invalid' : '' ?>" name="latitude" placeholder="Latitude" />
-           <div class="invalid-feedback"><?= $validation->getError('latitude') ?></div>
+            <label>Jabatan</label>
+            <select name="jabatan" class="form-control <?= ($validation->hasError('jabatan')) ? 'is-invalid' : '' ?>">
+              <option value="">—Pilih Jabatan—</option>
+              <?php foreach ($jabatan as $jab) : ?>
+               <option value="<?=$jab['jabatan']?>"><?=$jab['jabatan']?></option>
+              <?php endforeach; ?>
+           </select>
+            <div class="invalid-feedback"><?= $validation->getError('jabatan') ?></div>
           </div>
 
           <div class="input-style-1">
-         <label>Longitude</label>
-           <input type="text" class="form-control <?= ($validation->hasError('longitude')) ? 'is-invalid' : '' ?>" name="longitude" placeholder="Longitude" />
-           <div class="invalid-feedback"><?= $validation->getError('longitude') ?></div>
-          </div>
+          <label>Lokasi Presensi</label>
+           <select name="lokasi_presensi" class="form-control <?=($validation->hasError('lokasi_presensi')) ? 'is-invalid' : ''?>">
+            <option value="">—Pilih Lokasi Presensi—</option>
+              <?php foreach ($lokasi_presensi as $lok) : ?>
+            <option value="<?=$lok['id']?>"><?=$lok['nama_lokasi']?></option>
+           <?php endforeach; ?>
+       </select>
+       <div class="invalid-feedback"><?=$validation->getError('lokasi_presensi')?></div>
+      </div>
+       <div class="input-style-1">
+          <label>Foto</label>
+          <input type="file" class="form-control <?=($validation->hasError('foto')) ? 'is-invalid' : ''?>" name="foto" />
+        <div class="invalid-feedback"><?=$validation->getError('foto')?></div>
+      </div>
 
-          <div class="input-style-1">
-         <label>Radius</label>
-           <input type="number" class="form-control <?= ($validation->hasError('radius')) ? 'is-invalid' : '' ?>" name="radius" placeholder="Radius" />
-           <div class="invalid-feedback"><?= $validation->getError('radius') ?></div>
-          </div>
+      <div class="input-style-1">
+         <label>Username</label>
+         <input type="text" class="form-control <?=($validation->hasError('username')) ? 'is-invalid' : ''?>" name="username" placeholder="username" />
+        <div class="invalid-feedback"><?=$validation->getError('username')?></div>
+    </div>
 
-          <div class="input-style-1">
-         <label>Zona Waktu</label>
-          <select name="zona_waktu" class="form-control <?= ($validation->hasError('zona_waktu')) ? 'is-invalid' : '' ?>">
-          <option value="">—Pilih Zona Waktu—</option>
-            <option value="WIB">WIB</option>
-            <option value="WITA">WITA</option>
-            <option value="WIT">WIT</option>
-          </select>
-           <div class="invalid-feedback"><?= $validation->getError('zona_waktu') ?></div>
-          </div>
+    <div class="input-style-1">
+         <label>Password</label>
+         <input type="password" class="form-control <?=($validation->hasError('password')) ? 'is-invalid' : ''?>" name="password" placeholder="Password" />
+        <div class="invalid-feedback"><?=$validation->getError('password')?></div>
+    </div>
 
-          <div class="input-style-1">
-         <label>Jam Masuk</label>
-           <input type="time" class="form-control <?= ($validation->hasError('jam_masuk')) ? 'is-invalid' : '' ?>" name="jam_masuk" placeholder="Jam Masuk" />
-           <div class="invalid-feedback"><?= $validation->getError('jam_masuk') ?></div>
-          </div>
+    <div class="input-style-1">
+         <label>Konfirmasi Password</label>
+         <input type="password" class="form-control <?=($validation->hasError('konfirmasi_password')) ? 'is-invalid' : ''?>" name="konfirmasi_password" placeholder="Konfirmasi password" />
+        <div class="invalid-feedback"><?=$validation->getError('konfirmasi_password')?></div>
+    </div>
 
-          <div class="input-style-1">
-         <label>Jam Pulang</label>
-           <input type="time" class="form-control <?= ($validation->hasError('jam_keluar')) ? 'is-invalid' : '' ?>" name="jam_keluar" placeholder="Jam Pulang" />
-           <div class="invalid-feedback"><?= $validation->getError('jam_keluar') ?></div>
+        <div class="input-style-1">
+            <label>Role</label>
+            <select name="role" class="form-control <?= ($validation->hasError('role')) ? 'is-invalid' : '' ?>">
+              <option value="">—Pilih Jenis Role—</option>
+              <option value="Admin">Admin</option>
+             <option value="Pegawai">Pegawai</option>
+           </select>
+            <div class="invalid-feedback"><?= $validation->getError('role') ?></div>
           </div>
+        
 
           <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
          </div>

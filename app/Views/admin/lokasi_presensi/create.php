@@ -5,6 +5,7 @@
 <div class="card col-md-6">
     <div class="card-body">
     <form method="POST" action="<?= base_url('admin/lokasi_presensi/store') ?>">
+    <?= csrf_field() ?>
 
       <div class="input-style-1">
          <label>Nama Lokasi</label>
