@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\LokasiPresensiModel;
 use App\Models\PegawaiModel;
+use App\Models\PresensiModel;
 
 class Home extends BaseController
 {
@@ -13,12 +14,17 @@ class Home extends BaseController
     {
         $lokasi_presensi = new LokasiPresensiModel();
         $pegawai_model = new PegawaiModel();
+        $presensi_model = new PresensiModel();
         $id_pegawai = session() -> get('id_pegawai');
         $pegawai = $pegawai_model -> where('id', $id_pegawai) -> first();
         $data = [
             'title' => 'Home',
-            'lokasi_presensi'=> $lokasi_presensi->where('id', $pegawai ['lokasi_presensi']) -> first()
+            'lokasi_presensi'=> $lokasi_presensi->where('id', $pegawai ['lokasi_presensi']) -> first(),
+           'cek_presensi' => $presensi_model->where('id_pegawai', $id_pegawai)
+                             ->where('tanggal_masuk', date('Y-m-d'))
+                             ->countAll()
         ];
+        
         return view('pegawai/home', $data);
     }
 
@@ -49,4 +55,30 @@ class Home extends BaseController
         }
     
     }
+
+    public function presensi_masuk_aksi()
+        {
+         $request = \Config\Services::request();
+         $id_pegawai = $request->getPost('id_pegawai');
+        $tanggal_masuk = $request->getPost('tanggal_masuk');
+         $jam_masuk = $request->getPost('jam_masuk');
+         $foto_masuk = $request->getPost('foto_masuk');
+
+        $foto_masuk = str_replace('data:image/jpeg;base64,', '', $foto_masuk);
+        $foto_masuk = base64_decode($foto_masuk);
+
+        $foto_dir = 'uploads/'.$id_pegawai.'-'.time().'.jpg';
+        $nama_foto = $id_pegawai.'-'.time().'.jpg'; 
+        file_put_contents($foto_dir, $foto_masuk);
+
+        $presensi_model = new PresensiModel();
+        $presensi_model->insert([
+            'id_pegawai' => $id_pegawai,
+            'jam_masuk' => $jam_masuk,
+            'tanggal_masuk' => $tanggal_masuk,
+            'foto_masuk' => $nama_foto
+        ]);
+        session()->setFlashData('berhasil', 'Absen Mausk Berhasil');
+        return redirect()->to(base_url('pegawai/home'));
+        }
 }

@@ -10,12 +10,19 @@
     font-weight: bold;
     justify-content: center;
   }
+
+  .icon-large {
+        font-size: 100px; /* Perbesar ikon */
+        display: block; /* Membuat ikon berada di satu baris penuh */
+        margin: 0 auto 10px; /* Tengah & beri jarak bawah */
+    }
 </style>
 <div class="row">
   <div class="col-md-2"></div>
   <div class="col-md-4">
-    <div class="card">
+    <div class="card h-100">
       <div class="card-header">Presensi Masuk</div>
+      <?php if($cek_presensi < 1) : ?>
       <div class="card-body text-center">
       <div class="fw-bold"><?= date('d F Y') ?></div>
       <div class="parent-clock">
@@ -35,19 +42,25 @@
           date_default_timezone_set('Asia/Jayapura');}
         ?>
       
-        <input type="text" name="latitude_kantor" value="<?= $lokasi_presensi['latitude'] ?>">
-        <input type="text" name="longitude_kantor" value="<?= $lokasi_presensi['longitude'] ?>">
-        <input type="text" name="radius" value="<?= $lokasi_presensi['radius']?>" />
+        <input type="hidden" name="latitude_kantor" value="<?= $lokasi_presensi['latitude'] ?>">
+        <input type="hidden" name="longitude_kantor" value="<?= $lokasi_presensi['longitude'] ?>">
+        <input type="hidden" name="radius" value="<?= $lokasi_presensi['radius']?>" />
 
-        <input type="text" name="latitude_pegawai" id="latitude_pegawai">
-        <input type="text" name="longitude_pegawai" id="longitude_pegawai">
+        <input type="hidden" name="latitude_pegawai" id="latitude_pegawai">
+        <input type="hidden" name="longitude_pegawai" id="longitude_pegawai">
 
-        <input type="text" name="tanggal_masuk" value="<?= date('Y-m-d') ?>">
-        <input type="text" name="jam_masuk" value="<?= date('H:i:s') ?>">
-        <input type="text" name="id_pegawai" value="<?= session()->get('id_pegawai') ?>">
+        <input type="hidden" name="tanggal_masuk" value="<?= date('Y-m-d') ?>">
+        <input type="hidden" name="jam_masuk" value="<?= date('H:i:s') ?>">
+        <input type="hidden" name="id_pegawai" value="<?= session()->get('id_pegawai') ?>">
         <button class="btn btn-primary mt-3">Masuk</button>
     </form>
      </div>
+     <?php else : ?>
+      <div class="card-body text-center">
+        <i class="lni lni-checkmark-circle text-success icon-large"></i>
+        <h5>Anda telah melakukan absen masuk</h5>
+  </div>
+      <?php endif; ?>
     </div>
   </div>
   <div class="col-md-4"><div class="card">
