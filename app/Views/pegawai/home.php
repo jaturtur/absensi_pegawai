@@ -25,9 +25,28 @@
         <div>:</div>
         <div id="detik-masuk"></div>
       </div>
-      <form action="">
+      <form method="POST" action="<?= base_url('pegawai/presensi_masuk') ?>">
+      <?php
+        if($lokasi_presensi['zona_waktu'] == 'WIB'){
+         date_default_timezone_set('Asia/Jakarta');
+        }elseif($lokasi_presensi['zona_waktu'] == 'WITA'){
+        date_default_timezone_set('Asia/Makassar');
+        }elseif($lokasi_presensi['zona_waktu'] == 'WIT'){
+          date_default_timezone_set('Asia/Jayapura');}
+        ?>
+      
+        <input type="text" name="latitude_kantor" value="<?= $lokasi_presensi['latitude'] ?>">
+        <input type="text" name="longitude_kantor" value="<?= $lokasi_presensi['longitude'] ?>">
+        <input type="text" name="radius" value="<?= $lokasi_presensi['radius']?>" />
+
+        <input type="text" name="latitude_pegawai" id="latitude_pegawai">
+        <input type="text" name="longitude_pegawai" id="longitude_pegawai">
+
+        <input type="text" name="tanggal_masuk" value="<?= date('Y-m-d') ?>">
+        <input type="text" name="jam_masuk" value="<?= date('H:i:s') ?>">
+        <input type="text" name="id_pegawai" value="<?= session()->get('id_pegawai') ?>">
         <button class="btn btn-primary mt-3">Masuk</button>
-      </form>
+    </form>
      </div>
     </div>
   </div>
@@ -78,6 +97,20 @@
   } else {
     return waktu;
   }
+}
+
+getLocation();
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    alert("Browser Anda tidak mendukung Geolocation");
+  }
+}
+
+function showPosition(position) {
+  document.getElementById('latitude_pegawai').value = position.coords.latitude;
+  document.getElementById('longitude_pegawai').value = position.coords.longitude;
 }
   
 </script>

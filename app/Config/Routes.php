@@ -37,3 +37,4 @@ $routes->get('admin/data_pegawai/detail/(:segment)', 'Admin\DataPegawai::detail/
 
 
 $routes->get('pegawai/home', 'Pegawai\Home::index', ['filter' => 'pegawaiFilter']);
+$routes->post('pegawai/presensi_masuk', 'Pegawai\Home::presensi_masuk', ['filter' => 'pegawaiFilter']);
