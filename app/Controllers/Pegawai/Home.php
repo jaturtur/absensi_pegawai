@@ -22,7 +22,10 @@ class Home extends BaseController
             'lokasi_presensi'=> $lokasi_presensi->where('id', $pegawai ['lokasi_presensi']) -> first(),
            'cek_presensi' => $presensi_model->where('id_pegawai', $id_pegawai)
                              ->where('tanggal_masuk', date('Y-m-d'))
-                             ->countAll()
+                             ->countAllResults(),
+           'ambil_presensi_masuk' => $presensi_model->where('id_pegawai', $id_pegawai)
+                             ->where('tanggal_masuk', date('Y-m-d'))
+                             ->first()                 
         ];
         
         return view('pegawai/home', $data);
@@ -81,4 +84,80 @@ class Home extends BaseController
         session()->setFlashData('berhasil', 'Absen Mausk Berhasil');
         return redirect()->to(base_url('pegawai/home'));
         }
+
+        public function presensi_keluar($id)
+        {
+            $latitude_pegawai = (float) $this->request->getPost('latitude_pegawai');
+            $latitude_kantor = (float) $this->request->getPost('latitude_kantor');
+            $radius = $this->request->getPost('radius');
+        
+            // Hitung jarak
+            $jarak = sin(deg2rad($latitude_pegawai)) * sin(deg2rad($latitude_kantor)) + 
+                     cos(deg2rad($latitude_pegawai)) * cos(deg2rad($latitude_kantor));
+            $jarak = acos($jarak);
+            $jarak = rad2deg($jarak);
+            $mil = $jarak * 60 * 1.1515;
+            $km = $mil * 1.609344;
+            $jarak_meter = floor($km * 1000);
+        
+            if ($jarak_meter > $radius) {
+                session()->setFlashdata('gagal', 'Presensi gagal, Lokasi Anda berada di luar radius kantor');
+                return redirect()->to(base_url('pegawai/home'));
+            } else {
+                // Pastikan nilai jam keluar ada, jika kosong isi dengan waktu saat ini
+                $tanggal_keluar = $this->request->getPost('tanggal_keluar') ?: date('Y-m-d');
+                $jam_keluar = $this->request->getPost('jam_keluar') ?: date('H:i:s');
+        
+                $data = [
+                    'title' => "Ambil Foto Selfie",
+                    'id_presensi' => $id,
+                    'tanggal_keluar' => $tanggal_keluar,
+                    'jam_keluar' => $jam_keluar,
+                ];
+        
+                return view('pegawai/ambil_foto_keluar', $data);
+            }
+        }
+        
+        public function presensi_keluar_aksi($id)
+        {
+            $request = \Config\Services::request();
+            
+            // Ambil data POST
+            $tanggal_keluar = $request->getPost('tanggal_keluar') ?: date('Y-m-d');
+            $jam_keluar = $request->getPost('jam_keluar') ?: date('H:i:s');
+            $foto_keluar = $request->getPost('foto_keluar');
+        
+            // Periksa apakah data kosong
+            if (empty($foto_keluar)) {
+                session()->setFlashData('gagal', 'Foto wajib diunggah!');
+                return redirect()->to(base_url('pegawai/home'));
+            }
+        
+            // Decode foto dari base64
+            $foto_keluar = str_replace('data:image/jpeg;base64,', '', $foto_keluar);
+            $foto_keluar = base64_decode($foto_keluar);
+        
+            // Buat path dan nama file
+            $foto_dir = 'uploads/'.$id.'-'.time().'.jpg';
+            $nama_foto = $id.'-'.time().'.jpg';
+        
+            // Simpan foto ke server
+            if (!file_put_contents($foto_dir, $foto_keluar)) {
+                session()->setFlashData('gagal', 'Gagal menyimpan foto. Periksa izin folder uploads!');
+                return redirect()->to(base_url('pegawai/home'));
+            }
+        
+            // Simpan data presensi ke database
+            $presensi_model = new PresensiModel();
+            $presensi_model->update($id, [
+                'jam_keluar' => $jam_keluar,
+                'tanggal_keluar' => $tanggal_keluar,
+                'foto_keluar' => $nama_foto
+            ]);
+        
+            session()->setFlashData('berhasil', 'Absen keluar berhasil');
+            return redirect()->to(base_url('pegawai/home'));
+        }
+        
 }
