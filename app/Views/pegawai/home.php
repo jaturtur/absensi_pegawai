@@ -63,9 +63,20 @@
       <?php endif; ?>
     </div>
   </div>
-  <div class="col-md-4"><div class="card">
+  <div class="col-md-4"><div class="card h-100">
       <div class="card-header">Presensi Keluar</div>
-      <div class="card-body text-center">
+      <?php if ($cek_presensi < 1) : ?>
+        <div class="card-body text-center">
+        <i class="lni lni-cross-circle text-danger icon-large"></i>
+        <h5>Anda belum melakukan absen masuk</h5>
+  </div>
+  <?php elseif ($cek_presensi_keluar > 0) : ?>
+<div class="card-body text-center">
+<i class="lni lni-checkmark-circle text-success icon-large"></i>
+  <h5 class="text-center">Anda telah melakukan absen pulang</h5>
+</div>
+<?php else : ?>
+<div class="card-body text-center">
       <div class="fw-bold"><?= date('d F Y') ?></div>
       <div class="parent-clock">
         <div id="jam-keluar"></div>
@@ -73,13 +84,33 @@
         <div id="menit-keluar"></div>
         <div>:</div>
         <div id="detik-keluar"></div>
-      </div>
-      <form action="">
+       </div>
+      <form method="POST" action="<?= base_url('pegawai/presensi_keluar/'.''.$ambil_presensi_masuk['id']) ?>">
+      <?php
+        if($lokasi_presensi['zona_waktu'] == 'WIB'){
+         date_default_timezone_set('Asia/Jakarta');
+        }elseif($lokasi_presensi['zona_waktu'] == 'WITA'){
+        date_default_timezone_set('Asia/Makassar');
+        }elseif($lokasi_presensi['zona_waktu'] == 'WIT'){
+          date_default_timezone_set('Asia/Jayapura');}
+        ?>
+      
+        <input type="hidden" name="latitude_kantor" value="<?= $lokasi_presensi['latitude'] ?>">
+        <input type="hidden" name="longitude_kantor" value="<?= $lokasi_presensi['longitude'] ?>">
+        <input type="hidden" name="radius" value="<?= $lokasi_presensi['radius']?>" />
+
+        <input type="hidden" name="latitude_pegawai" id="latitude_pegawai">
+        <input type="hidden" name="longitude_pegawai" id="longitude_pegawai">
+
+        <input type="hidden" name="tanggal_keluar" value="<?= date('Y-m-d') ?>">
+        <input type="hidden" name="jam_keluar" value="<?= date('H:i:s') ?>">
         <button class="btn btn-danger mt-3">Keluar</button>
       </form>
      </div>
     </div>
-   </div>
+
+<?php endif; ?>
+</div>
   <div class="col-md-2"></div>
 </div>
 
