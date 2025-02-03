@@ -191,7 +191,7 @@ function initMap(latitude_pegawai, longitude_pegawai){
   }).addTo(map);
 
   var greenIcon = L.icon({
-    iconUrl: '<?= base_url('assets/images/icon.png') ?>',
+    iconUrl: '<?= base_url('assets/images/gedung.png') ?>',
   
 
     iconSize:     [38, 95], // size of the icon
