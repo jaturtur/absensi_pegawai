@@ -3,7 +3,14 @@
 <?= $this->section('content') ?>
 
 <style>
-  #map { height: 500px; }
+  #map { 
+    height: 600px;
+    z-index: 0;
+    }
+
+    .navbar {
+        z-index: 1;
+    }
 </style>
 
 <div class="row">
@@ -74,6 +81,21 @@
 }).addTo(map);
 
 var marker = L.marker([<?= $lokasi_presensi['latitude'] ?>, <?= $lokasi_presensi['longitude'] ?>]).addTo(map);
+
+// Add a circle with a radius of 500 meters
+var circle = L.circle([<?= $lokasi_presensi['latitude'] ?>, <?= $lokasi_presensi['longitude'] ?>], {
+    color: 'green',
+    fillColor: 'green',
+    fillOpacity: 0.5,
+    radius: <?= $lokasi_presensi['radius'] ?>
+}).addTo(map);
+
+// Smoothly transition to the location
+setTimeout(function() {
+    map.flyTo([<?= $lokasi_presensi['latitude'] ?>, <?= $lokasi_presensi['longitude'] ?>], 16, {
+      duration: 4
+    });
+  }, 1000);
 </script>
 
 <?= $this->endSection() ?>
