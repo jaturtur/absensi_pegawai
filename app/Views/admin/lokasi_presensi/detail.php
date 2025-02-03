@@ -2,7 +2,13 @@
 
 <?= $this->section('content') ?>
 
-<div class="card col-md-8">
+<style>
+  #map { height: 500px; }
+</style>
+
+<div class="row">
+    <div class="col-md-6">
+    <div class="card ">
   <di class="card-body">
     <table class="table">
       <tr>
@@ -53,5 +59,21 @@
     </table>
   </di>
 </div>
+    </div>
+    <div class="col-md-6">
+     <div id="map"></div>
+    </div>
+</div>
+
+<script>
+  var map = L.map('map').setView([<?= $lokasi_presensi['latitude'] ?>, <?= $lokasi_presensi['longitude'] ?>], 13);
+
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+
+var marker = L.marker([<?= $lokasi_presensi['latitude'] ?>, <?= $lokasi_presensi['longitude'] ?>]).addTo(map);
+</script>
 
 <?= $this->endSection() ?>
