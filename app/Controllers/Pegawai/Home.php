@@ -17,6 +17,11 @@ class Home extends BaseController
         $presensi_model = new PresensiModel();
         $id_pegawai = session() -> get('id_pegawai');
         $pegawai = $pegawai_model -> where('id', $id_pegawai) -> first();
+
+        if (!$pegawai) {
+            // Handle the case where $pegawai is null
+            throw new \Exception("Pegawai dengan ID $id_pegawai tidak ditemukan.");
+          }
         $data = [
             'title' => 'Home',
             'lokasi_presensi'=> $lokasi_presensi->where('id', $pegawai ['lokasi_presensi']) -> first(),

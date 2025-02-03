@@ -16,8 +16,15 @@
         display: block; /* Membuat ikon berada di satu baris penuh */
         margin: 0 auto 10px; /* Tengah & beri jarak bawah */
     }
+
+    #map {
+      height: 500px;
+      width: 700px;
+      margin: auto;
+  }
 </style>
-<div class="row">
+
+<div class="row mb-3">
   <div class="col-md-2"></div>
   <div class="col-md-4">
     <div class="card h-100">
@@ -114,6 +121,9 @@
   <div class="col-md-2"></div>
 </div>
 
+<div id="map">
+
+</div>
 
 <script>
   window.setInterval("waktuMasuk()", 1000)
@@ -153,9 +163,47 @@ function getLocation() {
 }
 
 function showPosition(position) {
-  document.getElementById('latitude_pegawai').value = position.coords.latitude;
-  document.getElementById('longitude_pegawai').value = position.coords.longitude;
-}
+  var latitude_pegawai = position.coords.latitude;
+  var longitude_pegawai = position.coords.longitude;
+
+  document.getElementById('latitude_pegawai').value = latitude_pegawai;
+  document.getElementById('longitude_pegawai').value = longitude_pegawai;
+
+  initMap(latitude_pegawai, longitude_pegawai)
   
+}
+
+
+function initMap(latitude_pegawai, longitude_pegawai){
+  var map = L.map('map').setView([<?= $lokasi_presensi['latitude'] ?>, <?= $lokasi_presensi['longitude'] ?>], 13);
+
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 19,
+  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map);
+
+  var marker = L.marker([<?= $lokasi_presensi['latitude'] ?>, <?= $lokasi_presensi['longitude'] ?>]).addTo(map);
+  var circle = L.circle([latitude_pegawai, longitude_pegawai], {
+  color: 'red',
+  fillColor: '#f03',
+  fillOpacity: 0.5,
+  radius: 300
+  }).addTo(map);
+
+  var greenIcon = L.icon({
+    iconUrl: '<?= base_url('assets/images/icon.png') ?>',
+  
+
+    iconSize:     [38, 95], // size of the icon
+    shadowSize:   [50, 64], // size of the shadow
+    iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+    shadowAnchor: [4, 62],  // the same for the shadow
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+  });
+  L.marker([<?= $lokasi_presensi['latitude'] ?>, <?= $lokasi_presensi['longitude'] ?>], {icon: greenIcon}).addTo(map);
+
+  circle.bindPopup("Lokasi Anda Saat Ini");
+}
+ 
 </script>
 <?= $this->endSection() ?>
