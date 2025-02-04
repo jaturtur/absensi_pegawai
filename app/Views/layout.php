@@ -15,7 +15,8 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/main.css') ?>">
 
     <!--!===== Tabler ICON =====-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/1.35.0/iconfont/tabler-icons.min.css" integrity="sha512-tpsEzNMLQS7w9imFSjbeOHdZav3/a0bSESAL1y5jyJDoICFF2YwEdAHOPdOr1t+h8hTzar0flphxR76pd0V1zQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/1.35.0/iconfont/tabler-icons.min.css" crossorigin="anonymous">
+
   </head>
   <body>
     <!-- ======== Preloader =========== -->
