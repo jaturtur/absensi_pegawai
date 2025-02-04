@@ -35,6 +35,9 @@ $routes->post('admin/data_pegawai/update/(:segment)', 'Admin\DataPegawai::update
 $routes->get('admin/data_pegawai/delete/(:segment)', 'Admin\DataPegawai::delete/$1', ['filter' => 'adminFilter']);
 $routes->get('admin/data_pegawai/detail/(:segment)', 'Admin\DataPegawai::detail/$1', ['filter' => 'adminFilter']);
 
+$routes->get('admin/rekap_harian', 'Admin\RekapPresensi::rekap_harian', ['filter' => 'adminFilter']);
+
+
 
 $routes->get('pegawai/home', 'Pegawai\Home::index', ['filter' => 'pegawaiFilter']);
 $routes->post('pegawai/presensi_masuk', 'Pegawai\Home::presensi_masuk', ['filter' => 'pegawaiFilter']);
