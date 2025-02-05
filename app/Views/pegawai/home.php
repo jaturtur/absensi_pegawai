@@ -71,7 +71,7 @@
     </div>
   </div>
   <div class="col-md-4"><div class="card h-100">
-      <div class="card-header">Presensi Keluar</div>
+      <div class="card-header">Presensi Pulang</div>
       <?php if ($cek_presensi < 1) : ?>
         <div class="card-body text-center">
         <i class="lni lni-cross-circle text-danger icon-large"></i>
@@ -111,7 +111,7 @@
 
         <input type="hidden" name="tanggal_keluar" value="<?= date('Y-m-d') ?>">
         <input type="hidden" name="jam_keluar" value="<?= date('H:i:s') ?>">
-        <button class="btn btn-danger mt-3">Keluar</button>
+        <button class="btn btn-danger mt-3">Pulang</button>
       </form>
      </div>
     </div>

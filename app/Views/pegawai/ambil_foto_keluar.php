@@ -12,7 +12,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <div id="my_camera"></div>
 <div style="display: none;" id="my_result"></div>
-<button class="btn btn-danger mt-2" id="ambil-foto-keluar">Keluar</button>
+<button class="btn btn-danger mt-2" id="ambil-foto-keluar">Pulang</button>
 
 <script>
     Webcam.set({
