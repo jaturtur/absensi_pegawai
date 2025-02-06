@@ -4,7 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
-use App\Models\LokasiPresensiModel; // Use correct namespace here
+use App\Models\LokasiPresensiModel; 
 
 class LokasiPresensi extends BaseController
 {

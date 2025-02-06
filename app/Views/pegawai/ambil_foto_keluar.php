@@ -8,7 +8,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
 <input type="hidden" id="tanggal_keluar" name="tanggal_keluar" value="<?= $tanggal_keluar ?>">
-<input type="hidden" id="jam_keluar" name="jam_keluar" value="<?= $jam_keluar ?>">
+<input type="text" id="jam_keluar" name="jam_keluar" value="<?= $jam_keluar ?>">
 
 <div id="my_camera"></div>
 <div style="display: none;" id="my_result"></div>

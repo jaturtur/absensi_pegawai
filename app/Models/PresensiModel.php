@@ -63,5 +63,17 @@ public function rekap_bulanan_filter($filter_bulan,  $filter_tahun)
    return $builder->get()->getResultArray();
 }
 
+public function rekap_presensi_pegawai()
+     {
+        $id_pegawai = session()->get('id_pegawai');
+        $db      = \Config\Database::connect();
+        $builder = $db->table('presensi');
+        $builder->select('presensi.*, pegawai.nama, lokasi_presensi.jam_masuk as jam_masuk_kantor');
+        $builder->join('pegawai', 'pegawai.id = presensi.id_pegawai');
+        $builder->join('lokasi_presensi', 'lokasi_presensi.id = pegawai.lokasi_presensi');
+        $builder->where('id_pegawai', $id_pegawai);
+        return $builder->get()->getResultArray();
+    }
+
    
 }

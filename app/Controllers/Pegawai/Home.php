@@ -113,8 +113,8 @@ class Home extends BaseController
                 return redirect()->to(base_url('pegawai/home'));
             } else {
                 // Pastikan nilai jam keluar ada, jika kosong isi dengan waktu saat ini
-                $tanggal_keluar = $this->request->getPost('tanggal_keluar') ?: date('Y-m-d');
-                $jam_keluar = $this->request->getPost('jam_keluar') ?: date('H:i:s');
+                $tanggal_keluar = $this->request->getPost('tanggal_keluar');
+                $jam_keluar = $this->request->getPost('jam_keluar');
         
                 $data = [
                     'title' => "Ambil Foto Selfie",
@@ -132,8 +132,8 @@ class Home extends BaseController
             $request = \Config\Services::request();
             
             // Ambil data POST
-            $tanggal_keluar = $request->getPost('tanggal_keluar') ?: date('Y-m-d');
-            $jam_keluar = $request->getPost('jam_keluar') ?: date('H:i:s');
+            $tanggal_keluar = $request->getPost('tanggal_keluar');
+            $jam_keluar = $request->getPost('jam_keluar');
             $foto_keluar = $request->getPost('foto_keluar');
         
             // Periksa apakah data kosong
@@ -159,7 +159,7 @@ class Home extends BaseController
             // Simpan data presensi ke database
             $presensi_model = new PresensiModel();
             $presensi_model->update($id, [
-                'jam_keluar' => $jam_keluar,
+                'jam_keluar' => '12:00:00',
                 'tanggal_keluar' => $tanggal_keluar,
                 'foto_keluar' => $nama_foto
             ]);
