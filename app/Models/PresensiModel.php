@@ -14,7 +14,8 @@ class PresensiModel extends Model
         'foto_masuk',
         'tanggal_keluar',
         'jam_keluar',
-        'foto_keluar'
+        'foto_keluar',
+        'durasi'
     ];
 
     public function rekap_harian()

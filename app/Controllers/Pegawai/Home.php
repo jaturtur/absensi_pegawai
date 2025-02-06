@@ -113,8 +113,8 @@ class Home extends BaseController
                 return redirect()->to(base_url('pegawai/home'));
             } else {
                 // Pastikan nilai jam keluar ada, jika kosong isi dengan waktu saat ini
-                $tanggal_keluar = $this->request->getPost('tanggal_keluar') ?: date('Y-m-d');
-                $jam_keluar = $this->request->getPost('jam_keluar') ?: date('H:i:s');
+                $tanggal_keluar = $this->request->getPost('tanggal_keluar');
+                $jam_keluar = $this->request->getPost('jam_keluar');
         
                 $data = [
                     'title' => "Ambil Foto Selfie",
@@ -132,40 +132,53 @@ class Home extends BaseController
             $request = \Config\Services::request();
             
             // Ambil data POST
-            $tanggal_keluar = $request->getPost('tanggal_keluar') ?: date('Y-m-d');
-            $jam_keluar = $request->getPost('jam_keluar') ?: date('H:i:s');
+            $tanggal_keluar = $request->getPost('tanggal_keluar');
+            $jam_keluar = $request->getPost('jam_keluar');
             $foto_keluar = $request->getPost('foto_keluar');
-        
+            
             // Periksa apakah data kosong
             if (empty($foto_keluar)) {
                 session()->setFlashData('gagal', 'Foto wajib diunggah!');
                 return redirect()->to(base_url('pegawai/home'));
             }
-        
+            
             // Decode foto dari base64
             $foto_keluar = str_replace('data:image/jpeg;base64,', '', $foto_keluar);
             $foto_keluar = base64_decode($foto_keluar);
-        
+            
             // Buat path dan nama file
             $foto_dir = 'uploads/'.$id.'-'.time().'.jpg';
             $nama_foto = $id.'-'.time().'.jpg';
-        
+            
             // Simpan foto ke server
             if (!file_put_contents($foto_dir, $foto_keluar)) {
                 session()->setFlashData('gagal', 'Gagal menyimpan foto. Periksa izin folder uploads!');
                 return redirect()->to(base_url('pegawai/home'));
             }
         
-            // Simpan data presensi ke database
+            // Ambil data jam_masuk dari database berdasarkan id
             $presensi_model = new PresensiModel();
-            $presensi_model->update($id, [
-                'jam_keluar' => $jam_keluar,
-                'tanggal_keluar' => $tanggal_keluar,
-                'foto_keluar' => $nama_foto
-            ]);
+            $presensi = $presensi_model->find($id);
         
+            // Hitung durasi antara jam_masuk dan jam_keluar
+            $jam_masuk = new \DateTime($presensi['jam_masuk']);
+            $jam_keluar = new \DateTime($jam_keluar);
+            $interval = $jam_masuk->diff($jam_keluar);
+            
+            // Durasi dalam format jam:menit:detik
+            $durasi = $interval->format('%H:%I:%S');
+            
+            // Update data presensi ke database
+            $presensi_model->update($id, [
+                'jam_keluar' => $jam_keluar->format('H:i:s'),
+                'tanggal_keluar' => $tanggal_keluar,
+                'foto_keluar' => $nama_foto,
+                'durasi' => $durasi
+            ]);
+            
             session()->setFlashData('berhasil', 'Absen keluar berhasil');
             return redirect()->to(base_url('pegawai/home'));
         }
+        
         
 }
