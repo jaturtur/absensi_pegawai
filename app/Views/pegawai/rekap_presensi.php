@@ -7,7 +7,7 @@
         <input type="date" class="form-control" name="filter_tanggal">
     </div>
     <div class="col-auto">
-        <button type="submit" class="btn btn-primary mb-3">Tampilan</button>
+        <button type="submit" class="btn btn-primary mb-3">Tampilkan</button>
     </div>
 </form>
 <table class="table table-striped table-bordered">

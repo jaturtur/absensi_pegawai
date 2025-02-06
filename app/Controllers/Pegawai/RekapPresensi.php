@@ -12,11 +12,19 @@ class RekapPresensi extends BaseController
     public function index()
     {
         $presensiModel = new PresensiModel();
-        $data = [
-        'title' => 'Rekap Presensi',
-        'rekap_presensi' => $presensiModel->rekap_presensi_pegawai()
-      ];
+        $filter_tanggal = $this->request->getVar('filter_tanggal');
 
-         return view('pegawai/rekap_presensi', $data);
+        if ($filter_tanggal) {
+            $rekap_presensi =
+            $presensiModel->rekap_presensi_pegawai_filter($filter_tanggal);
+        } else {
+            $rekap_presensi = $presensiModel->rekap_presensi_pegawai();
+        }
+        $data = [
+            'title' => 'Rekap Presensi',
+            'rekap_presensi' => $rekap_presensi
+        ];
+    
+        return view('pegawai/rekap_presensi', $data);
     }
 }
