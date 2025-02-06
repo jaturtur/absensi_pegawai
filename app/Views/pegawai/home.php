@@ -110,8 +110,9 @@
         <input type="hidden" name="longitude_pegawai" id="longitude_pegawai">
 
         <input type="hidden" name="tanggal_keluar" value="<?= date('Y-m-d') ?>">
-        <input type="hidden" name="jam_keluar" value="<?= date('H:i:s') ?>">
-        <button class="btn btn-danger mt-3">Pulang</button>
+        <input type="hidden" name="jam_keluar" id="jam_keluar">
+        <button type="submit" class="btn btn-danger mt-3" onclick="setJamKeluar()">Pulang</button>
+</form>
       </form>
      </div>
     </div>
@@ -126,32 +127,34 @@
 </div>
 
 <script>
-  window.setInterval("waktuMasuk()", 1000)
-
-  function waktuMasuk (){
-  const waktu = new Date();
-  document.getElementById("jam-masuk").innerHTML =formatWaktu(waktu.getHours());
-  document.getElementById("menit-masuk").innerHTML = formatWaktu(waktu.getMinutes());
-  document.getElementById("detik-masuk").innerHTML = formatWaktu(waktu.getSeconds());
-
+  function waktuMasuk() {
+    const waktu = new Date(new Date().toLocaleString("en-US", {timeZone: "Asia/Makassar"}));
+    document.getElementById("jam-masuk").innerHTML = formatWaktu(waktu.getHours());
+    document.getElementById("menit-masuk").innerHTML = formatWaktu(waktu.getMinutes());
+    document.getElementById("detik-masuk").innerHTML = formatWaktu(waktu.getSeconds());
   }
 
-  window.setInterval("waktuKeluar()", 1000)
-
-  function waktuKeluar(){
-  const waktu = new Date();
-  document.getElementById("jam-keluar").innerHTML =formatWaktu(waktu.getHours());
-  document.getElementById("menit-keluar").innerHTML = formatWaktu(waktu.getMinutes());
-  document.getElementById("detik-keluar").innerHTML = formatWaktu(waktu.getSeconds());
-
-  }
-  function formatWaktu(waktu) {
-  if (waktu < 10) {
-    return "0" + waktu;
-  } else {
-    return waktu;
-  }
+  function waktuKeluar() {
+    const waktu = new Date(new Date().toLocaleString("en-US", {timeZone: "Asia/Makassar"}));
+    document.getElementById("jam-keluar").innerHTML = formatWaktu(waktu.getHours());
+    document.getElementById("menit-keluar").innerHTML = formatWaktu(waktu.getMinutes());
+    document.getElementById("detik-keluar").innerHTML = formatWaktu(waktu.getSeconds());
 }
+function setJamKeluar() {
+    const waktu = new Date(new Date().toLocaleString("en-US", {timeZone: "Asia/Makassar"}));
+    document.getElementById('jam_keluar').value = waktu.getHours().toString().padStart(2, '0') + ":" +
+                                                  waktu.getMinutes().toString().padStart(2, '0') + ":" +
+                                                  waktu.getSeconds().toString().padStart(2, '0');
+}
+
+
+  function formatWaktu(waktu) {
+    return waktu < 10 ? "0" + waktu : waktu;
+  }
+
+  setInterval(waktuMasuk, 1000);
+  setInterval(waktuKeluar, 1000);
+
 
 getLocation();
 function getLocation() {

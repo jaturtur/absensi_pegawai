@@ -31,6 +31,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         
         let tanggal_keluar = document.getElementById('tanggal_keluar').value;
         let jam_keluar = document.getElementById('jam_keluar').value;
+      
         
 
         Webcam.snap(function(data_uri) {
