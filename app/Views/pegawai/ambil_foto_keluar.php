@@ -48,7 +48,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
             xhttp.send(
                 'foto_keluar=' + encodeURIComponent(data_uri) +
                  '&tanggal_keluar=' + tanggal_keluar +
-                '&jam_keluar =' + jam_keluar
+                 '&jam_keluar=' + jam_keluar 
         );
 
        
