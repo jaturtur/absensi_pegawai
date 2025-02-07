@@ -5,10 +5,9 @@ list fitur yang belum :
 4. fitur presensi di pegawai 
 5. fitur loogbook harian 
 6. fitur rekap loogbok 
-7. export data absensi 
+7. repot data absensi 
 
 yang masih perbaikan
 1. beberapa crud edit 
 2. tampilan maps
-3. jam keluar yang hitungannya salah 
 4. Logika yang masih belum jalan 
