@@ -30,7 +30,9 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         
         let tanggal_keluar = document.getElementById('tanggal_keluar').value;
         let jam_keluar = document.getElementById('jam_keluar').value;
+      
         
+
         Webcam.snap(function(data_uri) {
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
@@ -45,10 +47,12 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.send(
                 'foto_keluar=' + encodeURIComponent(data_uri) +
-                '&tanggal_keluar=' + encodeURIComponent(tanggal_keluar) +
-                '&jam_keluar=' + encodeURIComponent(jam_keluar)
-            );
-        });
+                 '&tanggal_keluar=' + tanggal_keluar +
+                '&jam_keluar =' + jam_keluar
+        );
+
+       
+        })
     });
 </script>
 
