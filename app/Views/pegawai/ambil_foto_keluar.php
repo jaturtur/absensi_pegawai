@@ -6,9 +6,8 @@
 integrity="sha512-dQIiHSl2hr3NWKKLycPndtpbh5iaHLo6MwrXm7F0FM5e+kL2U16oE9uIwPHUl6fQBeCthiEuV/rzP3MiAB8Vfw=="
 crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-
 <input type="hidden" id="tanggal_keluar" name="tanggal_keluar" value="<?= $tanggal_keluar ?>">
-<input type="text" id="jam_keluar" name="jam_keluar" value="<?= $jam_keluar ?>">
+<input type="hidden" id="jam_keluar" name="jam_keluar" value="<?= $jam_keluar ?>">
 
 <div id="my_camera"></div>
 <div style="display: none;" id="my_result"></div>
@@ -31,9 +30,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         
         let tanggal_keluar = document.getElementById('tanggal_keluar').value;
         let jam_keluar = document.getElementById('jam_keluar').value;
-      
         
-
         Webcam.snap(function(data_uri) {
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
@@ -41,19 +38,17 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
                 if (xhttp.readyState === 4 && xhttp.status === 200) {
                     window.location.href = '<?= base_url('pegawai/home') ?>';
                 }
-
-        
-            };      
+            };
+            
+            // Memperbaiki kesalahan spasi pada pengiriman data
             xhttp.open("POST", "<?= base_url('pegawai/presensi_keluar_aksi/' . $id_presensi) ?>", true);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.send(
                 'foto_keluar=' + encodeURIComponent(data_uri) +
-                 '&tanggal_keluar=' + tanggal_keluar +
-                '&jam_keluar =' + jam_keluar
-        );
-
-       
-        })
+                '&tanggal_keluar=' + encodeURIComponent(tanggal_keluar) +
+                '&jam_keluar=' + encodeURIComponent(jam_keluar)
+            );
+        });
     });
 </script>
 
