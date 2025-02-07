@@ -52,9 +52,9 @@ $routes->get('pegawai/rekap_presensi', 'Pegawai\RekapPresensi::index', ['filter'
 $routes->get('pegawai/logbook', 'Pegawai\Logbook::index', ['filter' => 'pegawaiFilter']);
 
 $routes->get('pegawai/ketidakhadiran', 'Pegawai\Ketidakhadiran::index', ['filter' => 'pegawaiFilter']);
-$routes->get('pegawai/ketidakhadiran/create', 'pegawai/Ketidakhadiran::create', ['filter' => 'adminFilter']);
-$routes->post('pegawai/ketidakhadiran/store', 'pegawai/Ketidakhadiran::store', ['filter' => 'adminFilter']);
-$routes->get('pegawai/ketidakhadiran/edit/(:segment)', 'pegawai/Ketidakhadiran::edit/$1', ['filter' => 'adminFilter']);
-$routes->post('pegawai/ketidakhadiran/update/(:segment)', 'pegawai/Ketidakhadiran::update/$1', ['filter' => 'adminFilter']);
-$routes->get('pegawai/ketidakhadiran/delete/(:segment)', 'pegawai/Ketidakhadiran::delete/$1', ['filter' => 'adminFilter']);
-$routes->get('pegawai/ketidakhadiran/detail/(:segment)', 'pegawai/Ketidakhadiran::detail/$1', ['filter' => 'adminFilter']);
+$routes->get('pegawai/ketidakhadiran/create', 'pegawai\Ketidakhadiran::create', ['filter' => 'pegawaiFilter']);
+$routes->post('pegawai/ketidakhadiran/store', 'pegawai\Ketidakhadiran::store', ['filter' => 'pegawaiFilter']);
+$routes->get('pegawai/ketidakhadiran/edit/(:segment)', 'pegawai\Ketidakhadiran::edit/$1', ['filter' => 'pegawaiFilter']);
+$routes->post('pegawai/ketidakhadiran/update/(:segment)', 'pegawai\Ketidakhadiran::update/$1', ['filter' => 'pegawaiFilter']);
+$routes->get('pegawai/ketidakhadiran/delete/(:segment)', 'pegawai\Ketidakhadiran::delete/$1', ['filter' => 'pegawaiFilter']);
+$routes->get('pegawai/ketidakhadiran/detail/(:segment)', 'pegawai\Ketidakhadiran::detail/$1', ['filter' => 'pegawaiFilter']);
