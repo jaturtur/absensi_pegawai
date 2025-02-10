@@ -204,6 +204,41 @@
               });
             <?php } ?>
         });
+      
+      //data tables 
+        $(document).ready(function() {
+          $('#datatables').DataTable();
+        });
+      //sweetalert berhasil 
+        $(function() {
+            <?php if (session()->has('berhasil')) { ?>
+              Swal.fire({
+                title: "<?= session()->getFlashdata('berhasil') ?>",
+               icon: "success"
+              });
+            <?php } ?>
+        });
+
+        $('.tombol-hapus').on('click', function(){
+        var getLink = $(this).attr('href');
+        Swal.fire({
+         title: "Anda yakin ingin menghapus ini ?",
+         text: "Data yang sudah dihapus tidak dapat dikembalikan!",
+        icon: "warning",
+         showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+         confirmButtonText: "Yes"
+        }).then((result) => {
+           if (result.isConfirmed) {
+            window.location.href = getLink;
+       }
+    });
+    return false;
+      });
+
+
+
     </script>
   </body>
 </html>
