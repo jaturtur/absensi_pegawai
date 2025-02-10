@@ -42,27 +42,31 @@
           <div class="input-style-1">
             <label>Jabatan</label>
             <select name="jabatan" class="form-control <?= ($validation->hasError('jabatan')) ? 'is-invalid' : '' ?>">
-              <option value="<?= $pegawai['jabatan'] ?>"><?= $pegawai['jabatan'] ?></option>
-              <?php foreach ($jabatan as $jab) : ?>
-               <option value="<?=$jab['jabatan']?>"><?=$jab['jabatan']?></option>
-              <?php endforeach; ?>
-           </select>
+                <option value="">--Pilih Jabatan--</option>
+                <?php foreach ($jabatan as $jab) : ?>
+                    <option value="<?=$jab['jabatan']?>" <?= ($pegawai['jabatan'] == $jab['jabatan']) ? 'selected' : '' ?>><?=$jab['jabatan']?></option>
+                <?php endforeach; ?>
+            </select>
             <div class="invalid-feedback"><?= $validation->getError('jabatan') ?></div>
           </div>
 
           <div class="input-style-1">
           <label>Lokasi Presensi</label>
            <select name="lokasi_presensi" class="form-control <?=($validation->hasError('lokasi_presensi')) ? 'is-invalid' : ''?>">
-            <option value="<?= $pegawai['lokasi_presensi'] ?>"><?= $pegawai['lokasi_presensi'] ?></option>
-              <?php foreach ($lokasi_presensi as $lok) : ?>
-            <option value="<?=$lok['id']?>"><?=$lok['nama_lokasi']?></option>
-           <?php endforeach; ?>
-       </select>
-       <div class="invalid-feedback"><?=$validation->getError('lokasi_presensi')?></div>
-      </div>
+            <option value="">--Pilih Lokasi Presensi--</option>
+            <?php foreach ($lokasi_presensi as $lok) : ?>
+                <option value="<?=$lok['id']?>" <?= ($pegawai['lokasi_presensi'] == $lok['id']) ? 'selected' : '' ?>><?=$lok['nama_lokasi']?></option>
+            <?php endforeach; ?>
+           </select>
+           <div class="invalid-feedback"><?=$validation->getError('lokasi_presensi')?></div>
+          </div>
+
        <div class="input-style-1">
           <label>Foto</label>
           <input type="hidden" value="<?= $pegawai['foto'] ?>" name="foto_lama">
+          <?php if ($pegawai['foto']) : ?>
+            <img src="<?= base_url('profile/'.$pegawai['foto']) ?>" alt="Foto Pegawai" class="img-thumbnail mb-2" width="150">
+          <?php endif; ?>
           <input type="file" class="form-control <?=($validation->hasError('foto')) ? 'is-invalid' : ''?>" name="foto" />
         <div class="invalid-feedback"><?=$validation->getError('foto')?></div>
       </div>

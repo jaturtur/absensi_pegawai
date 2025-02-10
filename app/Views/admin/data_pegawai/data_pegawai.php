@@ -10,7 +10,7 @@
         <th>NIP</th>
         <th>Nama</th>
         <th>Jabatan</th>
-        <th>lokasi Presensi</th>
+        <th>Lokasi Presensi</th>
         <th>Aksi</th>
         </tr>
     </thead>
@@ -20,10 +20,10 @@
       
             <tr>
                 <td><?= $no++ ?></td>
-                <td><?= $peg ['nip'] ?></td>
-                <td><?= $peg ['nama'] ?></td>
-                <td><?= $peg ['jabatan'] ?></td>
-                <td><?= $peg ['lokasi_presensi'] ?></td>
+                <td><?= $peg['nip'] ?></td>
+                <td><?= $peg['nama'] ?></td>
+                <td><?= $peg['jabatan'] ?></td>
+                <td><?= $peg['nama_lokasi'] ?></td>
                 <td>
                 <div>
                 <a href="<?= base_url('admin/data_pegawai/detail/'). $peg['id'] ?>" class="badge bg-primary">Detail</a>
