@@ -21,6 +21,8 @@
      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
      crossorigin=""/>
+      <!--!===== datatbales =====-->
+      <link rel="stylesheet" href="https://cdn.datatables.net/2.2.1/css/dataTables.dataTables.css" />
 
      <!--!===== Leaflea JS =====-->
      <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -193,6 +195,12 @@
 
      <!--!===== Sweetalert =====-->
      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+         <!--!===== datatables =====-->
+    <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
+
+    
+
 
     <script>
        //sweetalert berhasil 

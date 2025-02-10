@@ -95,7 +95,7 @@ class Ketidakhadiran extends BaseController
             'tanggal' => $this->request->getPost('tanggal'),
             'id_pegawai' => $this->request->getPost('id_pegawai'),
             'deskripsi' => $this->request->getPost('deskripsi'),
-            'status' => 'pending',
+            'status' => 'Menunggu',
             'file' => $nama_file,
             ]);
 
@@ -169,7 +169,7 @@ class Ketidakhadiran extends BaseController
                 'keterangan' => $this->request->getPost('keterangan'),
                 'tanggal' => $this->request->getPost('tanggal'),
                 'deskripsi' => $this->request->getPost('deskripsi'),
-                'status' => 'pending',
+                'status' => 'menunggu',
                 'file' => $nama_file,
             ]);
 

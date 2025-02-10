@@ -17,7 +17,7 @@
     <!--!===== Tabler ICON =====-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/1.35.0/iconfont/tabler-icons.min.css" integrity="sha512-tpsEzNMLQS7w9imFSjbeOHdZav3/a0bSESAL1y5jyJDoICFF2YwEdAHOPdOr1t+h8hTzar0flphxR76pd0V1zQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-     <!--!===== Sweetalert =====-->
+     <!--!===== datatbales =====-->
      <link rel="stylesheet" href="https://cdn.datatables.net/2.2.1/css/dataTables.dataTables.css" />
 
      <!--!===== Sweetalert =====-->
@@ -119,7 +119,7 @@
             </ul>
           </li>
           <li class="nav-item mb-2">
-            <a href="#">
+          <a href="<?= base_url('admin/ketidakhadiran') ?>">
             <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-user-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M6 21v-2a4 4 0 0 1 4 -4h3.5" /><path d="M22 22l-5 -5" /><path d="M17 22l5 -5" /></svg>
               <span class="text">Ketidakhadiran</span>
             </a>
@@ -284,8 +284,8 @@
     
 
     <script>
-      //data tables 
-        $(document).ready(function() {
+       //data tables 
+       $(document).ready(function() {
           $('#datatables').DataTable();
         });
       //sweetalert berhasil 

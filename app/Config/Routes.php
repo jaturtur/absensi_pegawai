@@ -5,11 +5,13 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
+
+ // login gsn logout 
 $routes->get('/', 'Login::index');
 $routes->post('login', 'Login::login_action');
 $routes->get('logout', 'Login::logout');
 
-
+// bagian admin 
 $routes->get('admin/home', 'Admin\Home::index', ['filter' => 'adminFilter']);
 $routes->get('admin/jabatan', 'Admin\Jabatan::index', ['filter' => 'adminFilter']);
 $routes->get('admin/jabatan/create', 'Admin\Jabatan::create', ['filter' => 'adminFilter']);
@@ -37,9 +39,11 @@ $routes->get('admin/data_pegawai/detail/(:segment)', 'Admin\DataPegawai::detail/
 
 $routes->get('admin/rekap_harian', 'Admin\RekapPresensi::rekap_harian', ['filter' => 'adminFilter']);
 $routes->get('admin/rekap_bulanan', 'Admin\RekapPresensi::rekap_bulanan', ['filter' => 'adminFilter']);
+$routes->get('admin/ketidakhadiran', 'Admin\Ketidakhadiran::index', ['filter' => 'adminFilter']);
+$routes->get('admin/setuju_ketidakhadiran/(:segment)', 'Admin\Ketidakhadiran::setuju/$1', ['filter' => 'adminFilter']);
 
 
-
+//bagian pegawai 
 $routes->get('pegawai/home', 'Pegawai\Home::index', ['filter' => 'pegawaiFilter']);
 $routes->post('pegawai/presensi_masuk', 'Pegawai\Home::presensi_masuk', ['filter' => 'pegawaiFilter']);
 $routes->post('pegawai/presensi_masuk_aksi', 'Pegawai\Home::presensi_masuk_aksi', ['filter' => 'pegawaiFilter']);
