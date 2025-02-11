@@ -9,9 +9,13 @@
     <div class="col-auto">
         <button type="submit" class="btn btn-primary mb-3">Tampilan</button>
     </div>
+    <div class="col-auto">
+        <button type="submit" name="excel" class="btn btn-success mb-3">Export Excel</button>
+    </div>
 </form>
+
 <span>Menampilkan data:
-<?php if ($tanggal) : ?>
+<?php if ($tanggal) : ?> 
     <?= date('d F Y', strtotime($tanggal)) ?>
 <?php else : ?>
     <?= date('d F Y') ?>

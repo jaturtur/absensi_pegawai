@@ -24,9 +24,23 @@
                 <td><?= $lok ['tipe_lokasi'] ?></td>
                 <td>
                 <div>
-                <a href="<?= base_url('admin/lokasi_presensi/detail/'). $lok['id'] ?>" class="badge bg-primary">Detail</a>
-                <a href="<?= base_url('admin/lokasi_presensi/edit/'). $lok['id'] ?>" class="badge bg-primary">Edit</a>
-                <a href="<?= base_url('admin/lokasi_presensi/delete/'). $lok['id'] ?>" class="badge bg-danger tombol-hapus">Hapus</a>
+                <a href="<?= base_url('admin/lokasi_presensi/detail/'). $lok['id'] ?>" 
+                 class="badge bg-success" 
+                style="display: block; min-width: 120px; padding: 12px 0; text-align: center; margin-bottom: 8px; border-radius: 8px;">
+                    Detail
+                    </a>        
+
+                <a href="<?= base_url('admin/lokasi_presensi/edit/'). $lok['id'] ?>" 
+                    class="badge bg-warning" 
+                    style="display: block; min-width: 120px; padding: 12px 0; text-align: center; margin-bottom: 8px; border-radius: 8px;">
+                 Edit
+                    </a>
+
+            <a href="<?= base_url('admin/lokasi_presensi/delete/'). $lok['id'] ?>" 
+                    class="badge bg-danger tombol-hapus" 
+             style="display: block; min-width: 120px; padding: 12px 0; text-align: center; border-radius: 8px;">
+             Hapus
+            </a>
                 </div>
                 </td>
             </tr>

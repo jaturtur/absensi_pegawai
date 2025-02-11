@@ -20,8 +20,13 @@
                 <td><?= $jab ['jabatan'] ?></td>
                 <td>
                 <div>
-                <a href="<?= base_url('admin/jabatan/edit/'). $jab['id'] ?>" class="badge bg-primary">Edit Data</a>
-                <a href="<?= base_url('admin/jabatan/delete/'). $jab['id'] ?>" class="badge bg-danger tombol-hapus">Hapus Data</a>
+                <a href="<?= base_url('admin/jabatan/edit/'). $jab['id'] ?>" 
+                 class="badge bg-warning" 
+                 style="display: inline-block; min-width: 90px; padding: 10px 0; text-align: center;">
+                     Edit</a>
+                <a href="<?= base_url('admin/jabatan/delete/'). $jab['id'] ?>" 
+                  class="badge bg-danger tombol-hapus" 
+                 style="display: inline-block; min-width: 90px; padding: 10px 0; text-align: center;"> Hapus</a>
                 </div>
                 </td>
             </tr>

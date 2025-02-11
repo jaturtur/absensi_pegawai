@@ -26,9 +26,23 @@
                 <td><?= $peg['nama_lokasi'] ?></td>
                 <td>
                 <div>
-                <a href="<?= base_url('admin/data_pegawai/detail/'). $peg['id'] ?>" class="badge bg-primary">Detail</a>
-                <a href="<?= base_url('admin/data_pegawai/edit/'). $peg['id'] ?>" class="badge bg-primary">Edit</a>
-                <a href="<?= base_url('admin/data_pegawai/delete/'). $peg['id'] ?>" class="badge bg-danger tombol-hapus">Hapus</a>
+                         <a href="<?= base_url('admin/data_pegawai/detail/'). $peg['id'] ?>" 
+                             class="badge bg-" 
+                             style="display: inline-block; min-width: 90px; padding: 10px 0; text-align: center;">
+                                    Detail
+                            </a>
+
+                            <a href="<?= base_url('admin/data_pegawai/edit/'). $peg['id'] ?>" 
+                                     class="badge bg-warning" 
+                                     style="display: inline-block; min-width: 90px; padding: 10px 0; text-align: center;">
+                                      Edit
+                                </a>
+
+                            <a href="<?= base_url('admin/data_pegawai/delete/'). $peg['id'] ?>" 
+                                     class="badge bg-danger tombol-hapus" 
+                                    style="display: inline-block; min-width: 90px; padding: 10px 0; text-align: center;">
+                                     Hapus
+                            </a>
                 </div>
                 </td>
             </tr>
