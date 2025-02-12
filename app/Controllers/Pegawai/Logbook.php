@@ -7,11 +7,16 @@ use CodeIgniter\HTTP\ResponseInterface;
 
 class Logbook extends BaseController
 {
+    function __construct()
+    {
+    helper(['url', 'form']);
+    }
+
     public function index()
     {
         $data = [
             'title' => 'Logbook',
         ];
-        return view('pegawai/logbook', $data);
+        return view('pegawai/logbook/logbook', $data);
     }
 }

@@ -18,10 +18,15 @@
     }
 
     #map {
-      height: 500px;
-      width: 700px;
-      margin: auto;
-  }
+  height: 200px;
+  width: 700px;
+  margin: 20px auto; /* Memberi jarak dari atas */
+  border: 2px solid #333; /* Garis border */
+  border-radius: 10px; /* Membuat sudut border lebih halus */
+  padding: 10px; /* Memberi ruang di dalam border */
+  background-color: #f8f9fa; /* Warna latar belakang */
+}
+
 </style>
 
 <div class="row mb-3">

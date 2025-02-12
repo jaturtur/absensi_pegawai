@@ -46,9 +46,10 @@
         <button type="submit" name="excel" class="btn btn-success mb-3">Export Excel</button>
     </div>
 </form>
-<span>Menampilkan data:
+<span style="font-weight: bold; font-size: 16px; color: #007bff;">
+    📅 Menampilkan Data:  
     <?php if ($bulan) : ?>
-        <?= date('F Y', strtotime($tahun . '-' . $bulan)) ?>
+        <?= date('F Y', strtotime("$tahun-$bulan")) ?>
     <?php else : ?>
         <?= date('F Y') ?>
     <?php endif; ?>

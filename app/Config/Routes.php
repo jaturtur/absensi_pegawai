@@ -62,3 +62,5 @@ $routes->get('pegawai/ketidakhadiran/edit/(:segment)', 'pegawai\Ketidakhadiran::
 $routes->post('pegawai/ketidakhadiran/update/(:segment)', 'pegawai\Ketidakhadiran::update/$1', ['filter' => 'pegawaiFilter']);
 $routes->get('pegawai/ketidakhadiran/delete/(:segment)', 'pegawai\Ketidakhadiran::delete/$1', ['filter' => 'pegawaiFilter']);
 $routes->get('pegawai/ketidakhadiran/detail/(:segment)', 'pegawai\Ketidakhadiran::detail/$1', ['filter' => 'pegawaiFilter']);
+
+

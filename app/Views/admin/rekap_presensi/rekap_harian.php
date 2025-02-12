@@ -14,13 +14,15 @@
     </div>
 </form>
 
-<span>Menampilkan data:
-<?php if ($tanggal) : ?> 
-    <?= date('d F Y', strtotime($tanggal)) ?>
-<?php else : ?>
-    <?= date('d F Y') ?>
-<?php endif; ?>
+<span style="font-weight: bold; font-size: 16px; color: #007bff;">
+    📅 Menampilkan Data:  
+    <?php if (!empty($tanggal)) : ?> 
+        <?= date('d F Y', strtotime($tanggal)) ?>
+    <?php else : ?>
+        <?= date('d F Y') ?>
+    <?php endif; ?>
 </span>
+
 <table class="table table-striped table-bordered">
     <tr>
         <th>No</th>

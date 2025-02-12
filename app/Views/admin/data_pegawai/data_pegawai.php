@@ -27,7 +27,7 @@
                 <td>
                 <div>
                          <a href="<?= base_url('admin/data_pegawai/detail/'). $peg['id'] ?>" 
-                             class="badge bg-" 
+                             class="badge bg-success" 
                              style="display: inline-block; min-width: 90px; padding: 10px 0; text-align: center;">
                                     Detail
                             </a>
