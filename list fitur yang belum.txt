@@ -3,6 +3,7 @@ list fitur yang belum :
 2. fitur proses persetujuan logbook
 3. fitur cetak logbook 
 4. fitur upload file logbook 
+5. laporan logbook di cek dan disesuaikan dengan validasi yang ada 
 
 
 yang masih perbaikan
