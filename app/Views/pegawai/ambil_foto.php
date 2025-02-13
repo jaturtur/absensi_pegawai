@@ -20,24 +20,50 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         text-align: center;
         margin-top: 20px;
     }
+
     .camera-box {
         border: 3px solid #007bff;
         border-radius: 10px;
         padding: 10px;
         background: #f8f9fa;
+        overflow: hidden; /* Pastikan kamera tidak keluar */
+        width: 400px; /* Sesuaikan ukuran */
+        height: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
+
     .camera-title {
         font-size: 18px;
         font-weight: bold;
         margin-bottom: 10px;
     }
+
+    video {
+        width: 100%;
+        height: auto;
+        object-fit: cover; /* Pastikan video mengisi area dengan baik */
+    }
+
     #ambil-foto {
         display: block;
         margin: 20px auto;
         font-size: 16px;
         font-weight: bold;
+        padding: 10px 20px;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    #ambil-foto:hover {
+        background-color: #0056b3;
     }
 </style>
+
 
 <div class="camera-container">
     <div class="camera-title">📷 Silahkan Ambil Foto</div>
