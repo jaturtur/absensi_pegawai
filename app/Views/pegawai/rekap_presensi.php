@@ -9,19 +9,19 @@
     <div class="col-auto">
         <button type="submit" class="btn btn-primary mb-3">Tampilkan</button>
     </div>
-    <div class="col-auto">
+    <!-- <div class="col-auto">
         <button type="submit" name="excel" class="btn btn-success mb-3">Export Excel</button>
-    </div>
+    </div> -->
 </form>
 <table class="table table-striped table-bordered">
     <tr>
-        <th>No</th>
-        <th>Nama Pegawai</th>
-        <th>Tanggal</th>
-        <th>Jam masuk</th>
-        <th>Jam Keluar</th>
-        <th>Durasi Jam Kerja</th>
-        <th>Total Keterlambatan</th>
+        <th class="text-center">No</th>
+        <th class="text-center">Nama Pegawai</th>
+        <th class="text-center">Tanggal</th>
+        <th class="text-center">Jam masuk</th>
+        <th class="text-center">Jam Keluar</th>
+        <th class="text-center">Durasi Jam Kerja</th>
+        <th class="text-center">Total Keterlambatan</th>
     </tr>
 
 
@@ -48,21 +48,21 @@
 
         ?>
      <tr>
-            <td><?= $no++ ?></td>
-            <td><?= $rekap['nama'] ?></td>
-            <td><?= date('d F Y', strtotime($rekap['tanggal_masuk'])) ?></td>
-            <td><?= $rekap['jam_masuk'] ?></td>
-            <td><?= $rekap['jam_keluar'] ?></td>
-            <td>
+            <td class="text-center"><?= $no++ ?></td>
+            <td class="text-center"><?= $rekap['nama'] ?></td>
+            <td class="text-center"><?= date('d F Y', strtotime($rekap['tanggal_masuk'])) ?></td>
+            <td class="text-center"><?= $rekap['jam_masuk'] ?></td>
+            <td class="text-center"><?= $rekap['jam_keluar'] ?></td>
+            <td class="text-center">
             <?php if ($rekap['jam_keluar'] == '00:00:00') : ?>
                          0 Jam 0 Menit
             <?php else : ?>
             <?= $jam . ' Jam ' . $menit . ' Menit ' ?>
         <?php endif; ?>
         </td>   
-        <td>
+        <td class="text-center">
             <?php if ($jam_terlambat < 0 || $menit_terlambat < 0) : ?>
-              <span class="btn btn-success">On Time</span>
+                <span class="badge bg-success rounded-pill px-3 py-2">On Time</span>
             <?php else : ?>
             <?= $jam_terlambat . ' Jam ' . $menit_terlambat . ' Menit ' ?>
         <?php endif; ?>

@@ -6,12 +6,12 @@
 <table class="table table-striped" id="datatables">
     <thead>
         <tr>
-        <th>No</th>
-        <th>NIP</th>
-        <th>Nama</th>
-        <th>Jabatan</th>
-        <th>Lokasi Presensi</th>
-        <th>Aksi</th>
+        <th class="text-center">No</th>
+        <th class="text-center">NIP</th>
+        <th class="text-center">Nama</th>
+        <th class="text-center">Jabatan</th>
+        <th class="text-center">Lokasi Presensi</th>
+        <th class="text-center">Aksi</th>
         </tr>
     </thead>
     <tbody>
@@ -19,12 +19,12 @@
     foreach ($pegawai as $peg) :?>
       
             <tr>
-                <td><?= $no++ ?></td>
-                <td><?= $peg['nip'] ?></td>
-                <td><?= $peg['nama'] ?></td>
-                <td><?= $peg['jabatan'] ?></td>
-                <td><?= $peg['nama_lokasi'] ?></td>
-                <td>
+                <td class="text-center"><?= $no++ ?></td>
+                <td class="text-center"><?= $peg['nip'] ?></td>
+                <td class="text-center"><?= $peg['nama'] ?></td>
+                <td class="text-center"><?= $peg['jabatan'] ?></td>
+                <td class="text-center"><?= $peg['nama_lokasi'] ?></td>
+                <td class="text-center">
                 <div>
                          <a href="<?= base_url('admin/data_pegawai/detail/'). $peg['id'] ?>" 
                              class="badge bg-success" 

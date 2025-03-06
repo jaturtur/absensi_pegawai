@@ -6,11 +6,11 @@
 <table class="table table-striped" id="datatables">
     <thead>
         <tr>
-        <th>No</th>
-        <th>Nama Lokasi</th>
-        <th>Alamat Lokasi</th>
-        <th>Tipe Lokasi</th>
-        <th>Aksi</th>
+        <th class="text-center">No</th>
+        <th class="text-center">Nama Lokasi</th>
+        <th class="text-center">Alamat Lokasi</th>
+        <th class="text-center">Tipe Lokasi</th>
+        <th class="text-center">Aksi</th>
         </tr>
     </thead>
     <tbody>
@@ -18,11 +18,11 @@
     foreach ($lokasi_presensi as $lok) :?>
       
             <tr>
-                <td><?= $no++ ?></td>
-                <td><?= $lok ['nama_lokasi'] ?></td>
-                <td><?= $lok ['alamat_lokasi'] ?></td>
-                <td><?= $lok ['tipe_lokasi'] ?></td>
-                <td>
+                <td class="text-center"><?= $no++ ?></td>
+                <td class="text-center"><?= $lok ['nama_lokasi'] ?></td>
+                <td class="text-center"><?= $lok ['alamat_lokasi'] ?></td>
+                <td class="text-center"><?= $lok ['tipe_lokasi'] ?></td>
+                <td class="text-center">
                 <div>
                 <a href="<?= base_url('admin/lokasi_presensi/detail/'). $lok['id'] ?>" 
                  class="badge bg-success" 

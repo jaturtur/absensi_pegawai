@@ -127,10 +127,10 @@ class Home extends BaseController
             }
         }
         
-        public function presensi_keluar_aksi($id)
+       public function presensi_keluar_aksi($id)
 {
     $request = \Config\Services::request();
-            
+    
     // Ambil data POST
     $tanggal_keluar = $request->getPost('tanggal_keluar');
     $jam_keluar = $request->getPost('jam_keluar');
@@ -145,10 +145,15 @@ class Home extends BaseController
     // Decode foto dari base64
     $foto_keluar = str_replace('data:image/jpeg;base64,', '', $foto_keluar);
     $foto_keluar = base64_decode($foto_keluar);
-    
+
+    // Pastikan folder uploads ada
+    if (!is_dir('uploads')) {
+        mkdir('uploads', 0777, true);
+    }
+
     // Buat path dan nama file
-    $foto_dir = 'uploads/'.$id.'-'.time().'.jpg';
-    $nama_foto = $id.'-'.time().'.jpg';
+    $nama_foto = $id . '-' . time() . '.jpg';
+    $foto_dir = 'uploads/' . $nama_foto;
     
     // Simpan foto ke server
     if (!file_put_contents($foto_dir, $foto_keluar)) {
@@ -156,18 +161,27 @@ class Home extends BaseController
         return redirect()->to(base_url('pegawai/home'));
     }
 
-    // Ambil data jam_masuk dari database berdasarkan id
+    // Ambil data jam_masuk dari database
     $presensi_model = new PresensiModel();
     $presensi = $presensi_model->find($id);
 
+    // Periksa apakah data ditemukan
+    if (!$presensi) {
+        session()->setFlashData('gagal', 'Data presensi tidak ditemukan!');
+        return redirect()->to(base_url('pegawai/home'));
+    }
+
     // Hitung durasi antara jam_masuk dan jam_keluar
-    $jam_masuk = new \DateTime($presensi['jam_masuk']);
-    $jam_keluar = new \DateTime($jam_keluar);
-    $interval = $jam_masuk->diff($jam_keluar);
-    
-    // Durasi dalam format jam:menit:detik
-    $durasi = $interval->format('%H:%I:%S');
-    
+    try {
+        $jam_masuk = new \DateTime($presensi['jam_masuk']);
+        $jam_keluar = new \DateTime($jam_keluar);
+        $interval = $jam_masuk->diff($jam_keluar);
+        $durasi = $interval->format('%H:%I:%S');
+    } catch (\Exception $e) {
+        session()->setFlashData('gagal', 'Format jam tidak valid!');
+        return redirect()->to(base_url('pegawai/home'));
+    }
+
     // Update data presensi ke database
     $presensi_model->update($id, [
         'jam_keluar' => $jam_keluar->format('H:i:s'),
@@ -175,8 +189,14 @@ class Home extends BaseController
         'foto_keluar' => $nama_foto,
         'durasi' => $durasi
     ]);
-    
+
     session()->setFlashData('berhasil', 'Absen keluar berhasil');
+
+    // Jika request berasal dari AJAX, kirim response JSON
+    if ($request->isAJAX()) {
+        return $this->response->setJSON(['status' => 'success', 'message' => 'Absen keluar berhasil']);
+    }
+
     return redirect()->to(base_url('pegawai/home'));
 }
 

@@ -116,69 +116,70 @@ class Ketidakhadiran extends BaseController
     return view('pegawai/edit_ketidakhadiran', $data);
 }
 
-    public function update($id)
-    {
-       
-       $ketidakhadiranModel = new KetidakhadiranModel();
-       $rules = [
+public function update($id)
+{
+    $ketidakhadiranModel = new KetidakhadiranModel();
+    
+    $rules = [
         'keterangan' => [
-            'rules' => 'max_length[255]', // Jika diisi, maksimal 255 karakter
+            'rules' => 'max_length[255]', 
             'errors' => [
                 'max_length' => "Keterangan maksimal 255 karakter"
             ],
         ],
         'tanggal' => [
-            'rules' => 'valid_date', // Jika diisi, harus tanggal yang valid
+            'rules' => 'valid_date', 
             'errors' => [
                 'valid_date' => "Tanggal tidak valid"
             ],
         ],
         'deskripsi' => [
-            'rules' => 'min_length[10]', // Jika diisi, minimal 10 karakter
+            'rules' => 'required',
             'errors' => [
-                'min_length' => "Deskripsi minimal 10 karakter"
+                'required' => "Deskripsi wajib diisi"
+            ],
+        ],
+        'file' => [
+            'rules' => 'max_size[file,10240]|mime_in[file,image/png,image/jpeg,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document]|ext_in[file,png,jpg,jpeg,pdf,doc,docx]',
+            'errors' => [
+                'max_size' => "Ukuran file melebihi 10MB",
+                'mime_in' => "Jenis file yang diizinkan hanya PNG, JPEG, PDF, atau DOC",
+                'ext_in' => "Format file tidak diizinkan",
             ],
         ],
     ];
 
-
-        if (!$this->validate($rules)) {
-
-            
-                $ketidakhadiranModel = new KetidakhadiranModel();
-                $data = [
-                    'title' => 'Edit Ketidakhadiran',
-                    'ketidakhadiran' => $ketidakhadiranModel->find($id),
-                    'validation' => \Config\Services::validation()
-                ];
-                return view('pegawai/edit_ketidakhadiran', $data);
-            
-
-        } else {
-            $ketidakhadiranModel = new KetidakhadiranModel();
-
-            $file = $this->request->getFile('file');
-            
-            if ($file->getError() == 4) {
-                $nama_file = $this->request->getPost('file_lama');
-            } else {
-                $nama_file = $file->getRandomName();
-                $file->move('file_ketidakhadiran', $nama_file);
-            }
-            $ketidakhadiranModel ->update($id, [
-                'keterangan' => $this->request->getPost('keterangan'),
-                'tanggal' => $this->request->getPost('tanggal'),
-                'deskripsi' => $this->request->getPost('deskripsi'),
-                'status' => 'menunggu',
-                'file' => $nama_file,
-            ]);
-
-
-            session()->setFlashData('berhasil', 'Data ketidakhadiran berhasil diupdate');
-
-        return redirect()->to(base_url('pegawai/ketidakhadiran'));
-        }
+    if (!$this->validate($rules)) {
+        return redirect()->back()->withInput()->with('error', \Config\Services::validation()->listErrors());
     }
+
+    $file = $this->request->getFile('file');
+
+    // Cek apakah ada file yang diunggah
+    if ($file && $file->isValid() && !$file->hasMoved()) {
+        $allowedExtensions = ['png', 'jpg', 'jpeg', 'pdf', 'doc', 'docx'];
+        if (!in_array($file->getExtension(), $allowedExtensions)) {
+            return redirect()->back()->withInput()->with('error', 'Format file tidak diizinkan');
+        }
+
+        $nama_file = $file->getRandomName();
+        $file->move('file_ketidakhadiran', $nama_file);
+    } else {
+        $nama_file = $this->request->getPost('file_lama');
+    }
+
+    $ketidakhadiranModel->update($id, [
+        'keterangan' => $this->request->getPost('keterangan'),
+        'tanggal' => $this->request->getPost('tanggal'),
+        'deskripsi' => $this->request->getPost('deskripsi'),
+        'status' => 'Menunggu',
+        'file' => $nama_file,
+    ]);
+
+    session()->setFlashdata('berhasil', 'Data ketidakhadiran berhasil diupdate');
+    return redirect()->to(base_url('pegawai/ketidakhadiran'));
+}
+
     
     function delete($id)
     {

@@ -3,7 +3,6 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
-use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\KetidakhadiranModel;
 
 class Ketidakhadiran extends BaseController
@@ -27,9 +26,21 @@ class Ketidakhadiran extends BaseController
             'status' => 'Setuju',
         ]);
     
-        session()->setFlashData('berhasil', 'Pengajuan ketidakhadiran berhasil di setujui');
+        session()->setFlashData('berhasil', 'Pengajuan ketidakhadiran berhasil disetujui');
     
         return redirect()->to(base_url('admin/ketidakhadiran'));
     }
 
+    public function tolak($id)
+    {
+        $ketidakhadiranModel = new KetidakhadiranModel();
+    
+        $ketidakhadiranModel->update($id, [
+            'status' => 'Ditolak',
+        ]);
+    
+        session()->setFlashData('gagal', 'Pengajuan ketidakhadiran telah ditolak');
+    
+        return redirect()->to(base_url('admin/ketidakhadiran'));
+    }
 }

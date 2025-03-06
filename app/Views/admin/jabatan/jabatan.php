@@ -6,9 +6,9 @@
 <table class="table table-striped" id="datatables">
     <thead>
         <tr>
-            <td>No</td>
-            <td>Nama Jabatan</td>
-            <td>Aksi</td>
+            <td class="text-center">No</td>
+            <td class="text-center">Nama Jabatan</td>
+            <td class="text-center">Aksi</td>
         </tr>
     </thead>
     <tbody>
@@ -16,9 +16,9 @@
     foreach ($jabatan as $jab) :?>
       
             <tr>
-                <td><?= $no++ ?></td>
-                <td><?= $jab ['jabatan'] ?></td>
-                <td>
+                <td class="text-center"><?= $no++ ?></td>
+                <td class="text-center"><?= $jab['jabatan']?></td>
+                <td class="text-center">
                 <div>
                 <a href="<?= base_url('admin/jabatan/edit/'). $jab['id'] ?>" 
                  class="badge bg-warning" 

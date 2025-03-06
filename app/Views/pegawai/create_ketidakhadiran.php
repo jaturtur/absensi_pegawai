@@ -14,6 +14,7 @@
               <option value="">—Pilih Keterangan—</option>
               <option value="Izin">Izin</option>
              <option value="Sakit">Sakit</option>
+             <option value="Sakit">Perjalanan Tugas</option>
            </select>
             <div class="invalid-feedback"><?= $validation->getError('keterangan') ?></div>
           </div>

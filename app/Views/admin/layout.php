@@ -160,8 +160,8 @@
                     <div class="profile-info">
                       <div class="info">
                       <div class="image">
-                         <img src="<?= base_url('assets/images/profile/mohan 2.jpg') ?>" alt="" />
-                                </div>
+                        <img src="<?= base_url('profile/' . session()->get('foto')); ?>" alt="Profile Picture">
+                          </div>
                         <div>
                           <h6 class="fw-500 text-uppercase"><?= session()->get('username'); ?></h6>
                           <p><?= session()->get('role_id'); ?></p>
