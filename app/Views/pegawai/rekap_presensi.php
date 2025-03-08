@@ -62,7 +62,9 @@
         </td>   
         <td class="text-center">
             <?php if ($jam_terlambat < 0 || $menit_terlambat < 0) : ?>
-                <span class="badge bg-success rounded-pill px-3 py-2">On Time</span>
+                <span class="badge bg-success rounded-pill px-3 py-2">
+                        <i class="fas fa-check-circle me-1"></i> On Time
+                </span>
             <?php else : ?>
             <?= $jam_terlambat . ' Jam ' . $menit_terlambat . ' Menit ' ?>
         <?php endif; ?>

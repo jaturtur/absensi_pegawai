@@ -22,32 +22,44 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     }
 
     .camera-box {
-        border: 3px solid #007bff;
-        border-radius: 10px;
-        padding: 10px;
+        border: 5px solid #007bff;
+        border-radius: 15px;
+        padding: 0;
         background: #f8f9fa;
-        overflow: hidden; /* Pastikan kamera tidak keluar */
-        width: 400px; /* Sesuaikan ukuran */
+        overflow: hidden;
+        width: 400px;
         height: 300px;
         display: flex;
         justify-content: center;
         align-items: center;
+        position: relative;
     }
 
     .camera-title {
-        font-size: 18px;
+        font-size: 20px;
         font-weight: bold;
         margin-bottom: 10px;
+        color: #007bff;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .camera-title i {
+        font-size: 24px;
+        color: #007bff;
     }
 
     video {
         width: 100%;
-        height: auto;
-        object-fit: cover; /* Pastikan video mengisi area dengan baik */
+        height: 100%;
+        object-fit: cover;
     }
 
     #ambil-foto {
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         margin: 20px auto;
         font-size: 16px;
         font-weight: bold;
@@ -57,29 +69,38 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         color: white;
         border-radius: 5px;
         cursor: pointer;
+        transition: 0.3s;
+        gap: 10px;
     }
 
     #ambil-foto:hover {
         background-color: #0056b3;
     }
+
+    #ambil-foto i {
+        font-size: 18px;
+    }
 </style>
 
-
 <div class="camera-container">
-    <div class="camera-title">📷 Silahkan Ambil Foto</div>
+    <div class="camera-title">
+        <i class="fas fa-camera"></i> Silahkan Ambil Foto
+    </div>
     <div class="camera-box">
         <div id="my_camera"></div>
     </div>
 </div>
 <div style="display: none;" id="my_result"></div>
-<button class="btn btn-primary mt-2" id="ambil-foto">Masuk</button>
+<button class="btn btn-primary mt-2" id="ambil-foto">
+    <i class="fas fa-sign-in-alt"></i> Masuk
+</button>
 
 <script>
     Webcam.set({
-        width: 320,
-        height: 240,
-        dest_width: 320,
-        dest_height: 240,
+        width: 400,
+        height: 300,
+        dest_width: 400,
+        dest_height: 300,
         image_format: 'jpeg',
         jpeg_quality: 90,
         force_flash: false

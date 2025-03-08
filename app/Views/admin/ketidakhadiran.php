@@ -19,38 +19,60 @@
             <?php $no = 1;
             foreach ($ketidakhadiran as $ketidakhadiran) : ?>
                 <tr>
-                    <td class="text-center"><?= $no++ ?></td>
-                    <td class="text-center"><?= $ketidakhadiran['tanggal'] ?></td>
-                    <td class="text-center"><?= $ketidakhadiran['keterangan'] ?></td>
-                    <td class="text-center"><?= $ketidakhadiran['deskripsi'] ?></td>
-                    <td class="text-center">
+                    <td class="text-center align-middle"> <?= $no++ ?> </td>
+                    <td class="text-center align-middle"> <?= $ketidakhadiran['tanggal'] ?> </td>
+                    <td class="text-center align-middle"> <?= $ketidakhadiran['keterangan'] ?> </td>
+                    <td class="text-center align-middle"> <?= $ketidakhadiran['deskripsi'] ?> </td>
+                    <td class="text-center align-middle">
                         <?php 
                         $file_ext = pathinfo($ketidakhadiran['file'], PATHINFO_EXTENSION);
-                        if (in_array($file_ext, ['pdf', 'doc', 'docx'])) : ?>
-                            <a class="badge bg-light text-dark border border-primary p-2" 
-                               href="<?= base_url('file_ketidakhadiran/' . $ketidakhadiran['file']) ?>" download>
-                               📄 .<?= $file_ext ?></a>
+                        $file_url = base_url('file_ketidakhadiran/' . $ketidakhadiran['file']);
+                        ?>
+                        
+                        <?php if (in_array($file_ext, ['pdf', 'doc', 'docx'])) : ?>
+                            <a class="btn btn-light border p-2 rounded shadow-sm" 
+                               href="<?= ($file_ext == 'pdf') 
+                                        ? $file_url 
+                                        : 'https://docs.google.com/gview?url=' . urlencode($file_url) . '&embedded=true'; ?>" 
+                               target="_blank" 
+                               style="text-decoration: none; transition: 0.3s;">
+                               <i class="fa-solid fa-eye"></i> 
+                            </a>
+                            
+                            <a class="btn btn-light border p-2 rounded shadow-sm" 
+                               href="<?= $file_url ?>" download 
+                               style="text-decoration: none; transition: 0.3s;">
+                               <i class="fa-solid fa-download"></i>
+                            </a>
                         <?php else : ?>
-                            <a class="badge bg-warning text-dark border border-secondary p-2" 
-                               href="<?= base_url('file_ketidakhadiran/' . $ketidakhadiran['file']) ?>" download>
-                               📁 Unduh</a>
+                            <a class="badge bg-warning text-dark border p-2 rounded shadow-sm" 
+                               href="<?= $file_url ?>" download 
+                               style="text-decoration: none; transition: 0.3s;">
+                               <i class="fa-solid fa-file"></i> Unduh
+                            </a>
                         <?php endif; ?>
                     </td>
-                    <td class="text-center">
+                    <td class="text-center align-middle">
                         <?php if ($ketidakhadiran['status'] == 'Menunggu') : ?>
-                            <span class="badge bg-warning text-dark">⏳ Menunggu</span>
+                            <span class="badge bg-warning text-dark p-2 rounded shadow-sm"><i class="fa-solid fa-hourglass-half"></i> Menunggu</span>
                         <?php elseif ($ketidakhadiran['status'] == 'Setuju') : ?>
-                            <span class="badge bg-success text-white">✅ Setuju</span>
+                            <span class="badge bg-success text-white p-2 rounded shadow-sm"><i class="fa-solid fa-circle-check"></i> Setuju</span>
                         <?php else : ?>
-                            <span class="badge bg-danger text-white">❌ Ditolak</span>
+                            <span class="badge bg-danger text-white p-2 rounded shadow-sm"><i class="fa-solid fa-circle-xmark"></i> Ditolak</span>
                         <?php endif; ?>
                     </td>
-                    <td class="text-center">
+                    <td class="text-center align-middle">
                         <?php if ($ketidakhadiran['status'] == 'Menunggu') : ?>
-                            <a class="btn btn-success btn-sm" href="<?= base_url('admin/setuju_ketidakhadiran/' . $ketidakhadiran['id']) ?>">Setuju</a>
-                            <a class="btn btn-danger btn-sm" href="<?= base_url('admin/tolak_ketidakhadiran/' . $ketidakhadiran['id']) ?>">Tolak</a>
+                            <a class="btn btn-success btn-sm shadow-sm rounded" 
+                               href="<?= base_url('admin/setuju_ketidakhadiran/' . $ketidakhadiran['id']) ?>">
+                               <i class="fa-solid fa-check"></i> Setuju
+                            </a>
+                            <a class="btn btn-danger btn-sm shadow-sm rounded" 
+                               href="<?= base_url('admin/tolak_ketidakhadiran/' . $ketidakhadiran['id']) ?>">
+                               <i class="fa-solid fa-xmark"></i> Tolak
+                            </a>
                         <?php else : ?>
-                            <i class="text-secondary">Tidak ada aksi</i>
+                            <i class="text-secondary">Selesai</i>
                         <?php endif; ?>
                     </td>
                 </tr>

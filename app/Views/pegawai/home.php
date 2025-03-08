@@ -183,14 +183,14 @@ function initMap(latitude_pegawai, longitude_pegawai){
 
   var marker = L.marker([<?= $lokasi_presensi['latitude'] ?>, <?= $lokasi_presensi['longitude'] ?>]).addTo(map);
   var circle = L.circle([latitude_pegawai, longitude_pegawai], {
-  color: 'red',
-  fillColor: '#f03',
+  color: 'green',
+  fillColor: '#28a745',
   fillOpacity: 0.5,
   radius: 300
   }).addTo(map);
 
   var greenIcon = L.icon({
-    iconUrl: '<?= base_url('assets/images/gedung.png') ?>',
+    
   
 
     iconSize:     [38, 95], // size of the icon

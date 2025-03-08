@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js" 
-integrity="sha512-dQIiHSl2hr3NWKKLycPndtpbh5iaHLo6MwrXm7F0FM5e+kL2U16oE9uIwPHUl6fQBeCthiEuV/rzP3MiAB8Vfw=="
+integrity="sha512-dQIiHSl2hr3NWKKLycPndtpbh5iaHLo6MwrXm7F0FM5e+kL2U16oE9uIwPHUl6fQBeCthiEuV/rzP3MiAB8Vfw==" 
 crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <input type="hidden" id="tanggal_keluar" name="tanggal_keluar" value="<?= $tanggal_keluar ?>">
@@ -21,9 +21,9 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     }
 
     .camera-box {
-        border: 3px solid #dc3545;
-        border-radius: 10px;
-        padding: 10px;
+        border: 5px solid #dc3545;
+        border-radius: 15px;
+        padding: 0;
         background: #f8f9fa;
         overflow: hidden;
         width: 400px;
@@ -31,22 +31,34 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         display: flex;
         justify-content: center;
         align-items: center;
+        position: relative;
     }
 
     .camera-title {
-        font-size: 18px;
+        font-size: 20px;
         font-weight: bold;
         margin-bottom: 10px;
+        color: #dc3545;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .camera-title i {
+        font-size: 24px;
+        color: #dc3545;
     }
 
     video {
         width: 100%;
-        height: auto;
+        height: 100%;
         object-fit: cover;
     }
 
     #ambil-foto-keluar {
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         margin: 20px auto;
         font-size: 16px;
         font-weight: bold;
@@ -56,28 +68,38 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         color: white;
         border-radius: 5px;
         cursor: pointer;
+        transition: 0.3s;
+        gap: 10px;
     }
 
     #ambil-foto-keluar:hover {
         background-color: #b02a37;
     }
+
+    #ambil-foto-keluar i {
+        font-size: 18px;
+    }
 </style>
 
 <div class="camera-container">
-    <div class="camera-title">📷 Silahkan Ambil Foto</div>
+    <div class="camera-title">
+        <i class="fas fa-camera"></i> Silahkan Ambil Foto
+    </div>
     <div class="camera-box">
         <div id="my_camera"></div>
     </div>
 </div>
 <div style="display: none;" id="my_result"></div>
-<button class="btn btn-danger mt-2" id="ambil-foto-keluar">Pulang</button>
+<button class="btn btn-danger mt-2" id="ambil-foto-keluar">
+    <i class="fas fa-sign-out-alt"></i> Pulang
+</button>
 
 <script>
     Webcam.set({
-        width: 320,
-        height: 240,
-        dest_width: 320,
-        dest_height: 240,
+        width: 400,
+        height: 300,
+        dest_width: 400,
+        dest_height: 300,
         image_format: 'jpeg',
         jpeg_quality: 90,
         force_flash: false
