@@ -4,7 +4,7 @@
 
 <?php date_default_timezone_set('Asia/Jakarta'); ?>
 <span style="font-weight: bold; font-size: 16px; color: #007bff;">
-    📅 Data : <?= date('l, d F Y') ?>
+    <i class="fas fa-calendar-alt"></i> <?= date('l, d F Y') ?>
 </span>
 <div class="row">
             <div class="col-xl-3 col-lg-4 col-sm-6">
@@ -40,7 +40,7 @@
                 </div>
                 <div class="content">
                   <h6 class="mb-10">Alfa</h6>
-                  <h3 class="text-bold mb-10"><?=$total_pegawai - $total_hadir?></h3>
+                  <h3 class="text-bold mb-10"><?=$total_pegawai - $total_hadir - $ketidakhadiran ?></h3>
                 </div>
               </div>
               <!-- End Icon Cart -->

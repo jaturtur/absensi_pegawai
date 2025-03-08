@@ -102,34 +102,36 @@ class DataPegawai extends BaseController
                     'required' => "Lokasi presensi wajib dipilih"
                 ],
             ],
-           'foto' => [
-              'rules' => 'uploaded[foto]|max_size[foto,10240]|mime_in[foto,image/png,image/jpeg]',
-             'errors' => [
-             'uploaded' => "File foto wajib diupload",
-             'max_size' => "Ukuran foto melebihi 10MB",
+          'foto' => [
+            'rules' => 'uploaded[foto]|max_size[foto,5120]|mime_in[foto,image/png,image/jpeg]',
+            'errors' => [
+            'uploaded' => "File foto wajib diupload",
+            'max_size' => "Ukuran foto melebihi 5MB",
             'mime_in' => "Jenis file yang diizinkan hanya PNG atau JPEG"
-                 ],
-            ],
-
+                ],
+             ],
             'username' => [
             'rules' => 'required',
             'errors' => [
             'required' => "Username wajib diisi"
             ],
         ],
-                'password' => [
-                    'rules' => 'required',
-                    'errors' => [
-                    'required' => "Password wajib diisi"
-             ],
-        ],
-                  'konfirmasi_password' => [
+               'password' => [
+                'rules' => 'required|min_length[8]|regex_match[/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/]',
+                 'errors' => [
+                'required' => "Password wajib diisi",
+                'min_length' => "Password minimal 8 karakter",
+                'regex_match' => "Password harus mengandung huruf besar, huruf kecil, dan angka"
+                ],
+                ],
+            'konfirmasi_password' => [
                 'rules' => 'required|matches[password]',
                 'errors' => [
-                'required' => "Konfirmasi password wajib diisi",
-                'matches' => "Konfirmasi password tidak cocok"
-              ],
-        ] ,
+                    'required' => "Konfirmasi password wajib diisi",
+                    'matches' => "Konfirmasi password tidak cocok"
+                    ],
+                ],
+
         'role' => [
          'rules' => 'required',
          'errors' => [

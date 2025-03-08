@@ -140,13 +140,14 @@ public function update($id)
             ],
         ],
         'file' => [
-            'rules' => 'max_size[file,10240]|mime_in[file,image/png,image/jpeg,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document]|ext_in[file,png,jpg,jpeg,pdf,doc,docx]',
+            'rules' => 'max_size[file,5120]|mime_in[file,image/png,image/jpeg,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document]|ext_in[file,png,jpg,jpeg,pdf,doc,docx]',
             'errors' => [
-                'max_size' => "Ukuran file melebihi 10MB",
-                'mime_in' => "Jenis file yang diizinkan hanya PNG, JPEG, PDF, atau DOC",
-                'ext_in' => "Format file tidak diizinkan",
+            'max_size' => "Ukuran file melebihi 5MB",
+            'mime_in' => "Jenis file yang diizinkan hanya PNG, JPEG, PDF, atau DOC",
+            'ext_in' => "Format file tidak diizinkan",
             ],
         ],
+
     ];
 
     if (!$this->validate($rules)) {
