@@ -115,10 +115,8 @@
                     <div class="profile-info">
                       <div class="info">
                       <div class="image">
-                      <img src="<?= base_url('profile/' . session()->get('foto_profil')) ?>" 
-                      alt="Profile Picture" 
-                      onerror="this.onerror=null; this.src='<?= base_url('profile/default.png') ?>';"/>
-                      </div>
+                        <img src="<?= base_url('profile/'.session()->get('foto')); ?>" alt=" ">
+                          </div>
                         <div>
                           <h6 class="fw-500 text-uppercase"><?= session()->get('username'); ?></h6>
                           <p><?= session()->get('role_id'); ?></p>

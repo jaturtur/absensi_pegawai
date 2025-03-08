@@ -40,7 +40,7 @@
                 </div>
                 <div class="content">
                   <h6 class="mb-10">Alfa</h6>
-                  <h3 class="text-bold mb-10"><?=$total_pegawai - $ketidakhadiran?></h3>
+                  <h3 class="text-bold mb-10"><?=$total_pegawai - $total_hadir?></h3>
                 </div>
               </div>
               <!-- End Icon Cart -->
