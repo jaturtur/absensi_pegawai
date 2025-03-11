@@ -48,3 +48,9 @@ $routes->post('pegawai/presensi_keluar/(:segment)', 'Pegawai\Home::presensi_kelu
 $routes->post('pegawai/presensi_keluar_aksi/(:segment)', 'Pegawai\Home::presensi_keluar_aksi/$1', ['filter' => 'pegawaiFilter']);
 
 $routes->get('pegawai/logbook', 'Pegawai\Logbook::index', ['filter' => 'pegawaiFilter']);
+$routes->get('pegawai/logbook/create', 'Pegawai\Logbook::create', ['filter' => 'pegawaiFilter']);
+$routes->post('pegawai/logbook/store', 'Pegawai\Logbook::store', ['filter' => 'pegawaiFilter']);
+$routes->get('pegawai/logbook/edit/(:num)', 'Pegawai\Logbook::edit/$1', ['filter' => 'pegawaiFilter']);
+$routes->post('pegawai/logbook/update/(:num)', 'Pegawai\Logbook::update/$1', ['filter' => 'pegawaiFilter']);
+$routes->get('pegawai/logbook/delete/(:num)', 'Pegawai\Logbook::delete/$1', ['filter' => 'pegawaiFilter']);
+$routes->get('/pegawai/logbook/detail/(:num)', 'Pegawai\Logbook::detail/$1', ['filter' => 'pegawaiFilter']);
