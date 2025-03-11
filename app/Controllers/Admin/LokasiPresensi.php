@@ -4,7 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
-use App\Models\LokasiPresensiModel; // Use correct namespace here
+use App\Models\LokasiPresensiModel; 
 
 class LokasiPresensi extends BaseController
 {
@@ -140,95 +140,96 @@ class LokasiPresensi extends BaseController
     }
 
     public function update($id)
-    {
-        $lokasipresensiModel = new LokasiPresensiModel();
-        $rules = [
-             'nama_lokasi' => [
-                'rules' => 'required|is_unique[lokasi_presensi.nama_lokasi,id,{id}]',
-                'errors' => [
-                    'required' => "Nama lokasi wajib diisi",
-                     'is_unique' => 'Nama lokasi sudah terdaftar'
-                ],
+{
+    $lokasipresensiModel = new LokasiPresensiModel();
+    $existingData = $lokasipresensiModel->find($id);
+
+    $rules = [
+        'nama_lokasi' => [
+            'rules' => 'required|is_unique[lokasi_presensi.nama_lokasi,id,'.$id.']',
+            'errors' => [
+                'required' => "Nama lokasi wajib diisi",
+                'is_unique' => 'Nama lokasi sudah terdaftar'
             ],
-            'alamat_lokasi' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => "Alamat lokasi wajib diisi"
-                ],
+        ],
+        'alamat_lokasi' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => "Alamat lokasi wajib diisi"
             ],
-            'tipe_lokasi' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => "Tipe lokasi wajib diisi"
-                ],
+        ],
+        'tipe_lokasi' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => "Tipe lokasi wajib diisi"
             ],
-            'latitude' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => "Latitude wajib diisi"
-                ],
+        ],
+        'latitude' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => "Latitude wajib diisi"
             ],
-            'longitude' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => "Longitude wajib diisi"
-                ],
+        ],
+        'longitude' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => "Longitude wajib diisi"
             ],
-            'radius' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => "Radius wajib diisi"
-                ],
+        ],
+        'radius' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => "Radius wajib diisi"
             ],
-            'zona_waktu' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => "Zona waktu wajib diisi"
-                ],
+        ],
+        'zona_waktu' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => "Zona waktu wajib diisi"
             ],
-            'jam_masuk' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => "Jam masuk wajib diisi"
-                ],
+        ],
+        'jam_masuk' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => "Jam masuk wajib diisi"
             ],
-            'jam_keluar' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => "Jam keluar wajib diisi"
-                ],
+        ],
+        'jam_keluar' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => "Jam keluar wajib diisi"
             ],
+        ],
+    ];
+
+    if (!$this->validate($rules)) {
+
+        $data = [
+            'title' => 'Edit Lokasi Presensi',
+            'lokasi_presensi' => $existingData,
+            'validation' => \Config\Services::validation()
         ];
+        echo view('admin/lokasi_presensi/edit', $data);
 
-        if (!$this->validate($rules)) {
+    } else {
+        $lokasipresensiModel->update($id, [
+            'nama_lokasi' => $this->request->getPost('nama_lokasi'),
+            'alamat_lokasi' => $this->request->getPost('alamat_lokasi'),
+            'tipe_lokasi' => $this->request->getPost('tipe_lokasi'),
+            'latitude' => $this->request->getPost('latitude'),
+            'longitude' => $this->request->getPost('longitude'),
+            'radius' => $this->request->getPost('radius'),
+            'zona_waktu' => $this->request->getPost('zona_waktu'),
+            'jam_masuk' => $this->request->getPost('jam_masuk'),
+            'jam_keluar' => $this->request->getPost('jam_keluar')
+        ]);
 
-            $data = [
-                'title' => 'Edit Lokasi Presensi',
-                'lokasi_presensi' => $lokasipresensiModel->find($id),
-                'validation' => \Config\Services::validation()
-            ];
-            echo view('admin/lokasi_presensi/edit', $data);
+        session()->setFlashdata('berhasil', 'Data lokasi presensi berhasil diupdate');
 
-        } else {
-            $lokasipresensiModel = new LokasiPresensiModel();
-            $lokasipresensiModel->update($id, [
-                'nama_lokasi' => $this->request->getPost('nama_lokasi'),
-                'alamat_lokasi' => $this->request->getPost('alamat_lokasi'),
-                'tipe_lokasi' => $this->request->getPost('tipe_lokasi'),
-                'latitude' => $this->request->getPost('latitude'),
-                'longitude' => $this->request->getPost('longitude'),
-                'radius' => $this->request->getPost('radius'),
-                'zona_waktu' => $this->request->getPost('zona_waktu'),
-                'jam_masuk' => $this->request->getPost('jam_masuk'),
-                'jam_keluar' => $this->request->getPost('jam_keluar')
-            ]);
-
-
-            session()->setFlashdata('berhasil', 'Data lokasi presensi berhasil diupdate');
-
-            return redirect()->to(base_url('admin/lokasi_presensi'));
-        }
+        return redirect()->to(base_url('admin/lokasi_presensi'));
     }
+}
+
 
     function delete($id)
     {

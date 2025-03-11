@@ -3,21 +3,31 @@
 namespace App\Controllers\Pegawai;
 
 use App\Controllers\BaseController;
+<<<<<<< HEAD
 use App\Models\LogbookModel;
+=======
+>>>>>>> 4bcf2d23cb5aacf9c36cc4ac2dcfba60ea878756
 use CodeIgniter\HTTP\ResponseInterface;
 
 class Logbook extends BaseController
 {
+<<<<<<< HEAD
     protected $logbookModel;
 
     public function __construct()
     {
         $this->logbookModel = new LogbookModel();
+=======
+    function __construct()
+    {
+    helper(['url', 'form']);
+>>>>>>> 4bcf2d23cb5aacf9c36cc4ac2dcfba60ea878756
     }
 
     public function index()
     {
         $data = [
+<<<<<<< HEAD
             'title' => 'Daftar Logbook',
             'logbooks' => $this->logbookModel->findAll(),
         ];
@@ -88,5 +98,10 @@ class Logbook extends BaseController
 
         $data = ['title' => 'Detail Logbook', 'logbook' => $logbook];
         return view('pegawai/detail_logbook', $data);
+=======
+            'title' => 'Logbook',
+        ];
+        return view('pegawai/logbook/logbook', $data);
+>>>>>>> 4bcf2d23cb5aacf9c36cc4ac2dcfba60ea878756
     }
 }

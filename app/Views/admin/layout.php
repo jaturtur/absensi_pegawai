@@ -17,11 +17,15 @@
     <!--!===== Tabler ICON =====-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/1.35.0/iconfont/tabler-icons.min.css" integrity="sha512-tpsEzNMLQS7w9imFSjbeOHdZav3/a0bSESAL1y5jyJDoICFF2YwEdAHOPdOr1t+h8hTzar0flphxR76pd0V1zQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-     <!--!===== Sweetalert =====-->
+     <!--!===== datatbales =====-->
      <link rel="stylesheet" href="https://cdn.datatables.net/2.2.1/css/dataTables.dataTables.css" />
 
      <!--!===== Sweetalert =====-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!--!=====  Icon CSS =====-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
 
       <!--!===== Leaflea CSS =====-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -119,7 +123,7 @@
             </ul>
           </li>
           <li class="nav-item mb-2">
-            <a href="#">
+          <a href="<?= base_url('admin/ketidakhadiran') ?>">
             <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-user-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M6 21v-2a4 4 0 0 1 4 -4h3.5" /><path d="M22 22l-5 -5" /><path d="M17 22l5 -5" /></svg>
               <span class="text">Ketidakhadiran</span>
             </a>
@@ -160,8 +164,8 @@
                     <div class="profile-info">
                       <div class="info">
                       <div class="image">
-                         <img src="<?= base_url('assets/images/profile/mohan 2.jpg') ?>" alt="" />
-                                </div>
+                        <img src="<?= base_url('profile/'.session()->get('foto')); ?>" alt=" ">
+                          </div>
                         <div>
                           <h6 class="fw-500 text-uppercase"><?= session()->get('username'); ?></h6>
                           <p><?= session()->get('role_id'); ?></p>
@@ -169,41 +173,7 @@
                       </div>
                     </div>
                   </button>
-                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profile">
-                    <li>
-                      <div class="author-info flex items-center !p-1">
-                        <div class="image">
-                          <img src="assets/images/profile/profile-image.png" alt="image">
-                        </div>
-                        <div class="content">
-                          <h4 class="text-sm">Adam Joe</h4>
-                          <a class="text-black/40 dark:text-white/40 hover:text-black dark:hover:text-white text-xs"
-                            href="#">Email@gmail.com</a>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                      <a href="#0">
-                        <i class="lni lni-user"></i> View Profile
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#0">
-                        <i class="lni lni-alarm"></i> Notifications
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#0"> <i class="lni lni-inbox"></i> Messages </a>
-                    </li>
-                    <li>
-                      <a href="#0"> <i class="lni lni-cog"></i> Settings </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                      <a href="#0"> <i class="lni lni-exit"></i> Sign Out </a>
-                    </li>
-                  </ul>
+                 
                 </div>
                 <!-- profile end -->
               </div>
@@ -284,8 +254,8 @@
     
 
     <script>
-      //data tables 
-        $(document).ready(function() {
+       //data tables 
+       $(document).ready(function() {
           $('#datatables').DataTable();
         });
       //sweetalert berhasil 

@@ -18,10 +18,15 @@
     }
 
     #map {
-      height: 500px;
-      width: 700px;
-      margin: auto;
-  }
+  height: 200px;
+  width: 700px;
+  margin: 20px auto; /* Memberi jarak dari atas */
+  border: 2px solid #333; /* Garis border */
+  border-radius: 10px; /* Membuat sudut border lebih halus */
+  padding: 10px; /* Memberi ruang di dalam border */
+  background-color: #f8f9fa; /* Warna latar belakang */
+}
+
 </style>
 
 <div class="row mb-3">
@@ -126,32 +131,26 @@
 </div>
 
 <script>
-  window.setInterval("waktuMasuk()", 1000)
-
-  function waktuMasuk (){
-  const waktu = new Date();
-  document.getElementById("jam-masuk").innerHTML =formatWaktu(waktu.getHours());
-  document.getElementById("menit-masuk").innerHTML = formatWaktu(waktu.getMinutes());
-  document.getElementById("detik-masuk").innerHTML = formatWaktu(waktu.getSeconds());
-
+  function waktuMasuk() {
+    const waktu = new Date(new Date().toLocaleString("en-US", {timeZone: "Asia/Makassar"}));
+    document.getElementById("jam-masuk").innerHTML = formatWaktu(waktu.getHours());
+    document.getElementById("menit-masuk").innerHTML = formatWaktu(waktu.getMinutes());
+    document.getElementById("detik-masuk").innerHTML = formatWaktu(waktu.getSeconds());
   }
 
-  window.setInterval("waktuKeluar()", 1000)
-
-  function waktuKeluar(){
-  const waktu = new Date();
-  document.getElementById("jam-keluar").innerHTML =formatWaktu(waktu.getHours());
-  document.getElementById("menit-keluar").innerHTML = formatWaktu(waktu.getMinutes());
-  document.getElementById("detik-keluar").innerHTML = formatWaktu(waktu.getSeconds());
-
+  function waktuKeluar() {
+    const waktu = new Date(new Date().toLocaleString("en-US", {timeZone: "Asia/Makassar"}));
+    document.getElementById("jam-keluar").innerHTML = formatWaktu(waktu.getHours());
+    document.getElementById("menit-keluar").innerHTML = formatWaktu(waktu.getMinutes());
+    document.getElementById("detik-keluar").innerHTML = formatWaktu(waktu.getSeconds());
   }
+
   function formatWaktu(waktu) {
-  if (waktu < 10) {
-    return "0" + waktu;
-  } else {
-    return waktu;
+    return waktu < 10 ? "0" + waktu : waktu;
   }
-}
+
+  setInterval(waktuMasuk, 1000);
+  setInterval(waktuKeluar, 1000)
 
 getLocation();
 function getLocation() {
@@ -184,14 +183,14 @@ function initMap(latitude_pegawai, longitude_pegawai){
 
   var marker = L.marker([<?= $lokasi_presensi['latitude'] ?>, <?= $lokasi_presensi['longitude'] ?>]).addTo(map);
   var circle = L.circle([latitude_pegawai, longitude_pegawai], {
-  color: 'red',
-  fillColor: '#f03',
+  color: 'green',
+  fillColor: '#28a745',
   fillOpacity: 0.5,
   radius: 300
   }).addTo(map);
 
   var greenIcon = L.icon({
-    iconUrl: '<?= base_url('assets/images/gedung.png') ?>',
+    
   
 
     iconSize:     [38, 95], // size of the icon

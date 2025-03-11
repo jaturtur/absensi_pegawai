@@ -1,14 +1,11 @@
 list fitur yang belum :
-1. Rekap presensi harian dan bulanan di admin 
-2. Membuat Fitur ketidakhadiran 
-3. fitur logbook 
-4. fitur presensi di pegawai 
-5. fitur loogbook harian 
-6. fitur rekap loogbok 
-7. export data absensi 
+1. fitur logbook 
+2. fitur proses persetujuan logbook
+3. fitur cetak logbook 
+4. fitur upload file logbook 
+5. laporan logbook di cek dan disesuaikan dengan validasi yang ada 
+
 
 yang masih perbaikan
 1. beberapa crud edit 
-2. tampilan maps
-3. jam keluar yang hitungannya salah 
-4. Logika yang masih belum jalan 
+2. Logika yang masih belum jalan 

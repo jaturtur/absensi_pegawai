@@ -25,9 +25,9 @@
               <div class="auth-cover-wrapper bg-primary-100">
                 <div class="auth-cover">
                   <div class="title text-center">
-                    <h1 class="text-primary mb-10">Welcome Back</h1>
+                    <h1 class="text-primary mb-10">Selamat Datang</h1>
                     <p class="text-medium">
-                      Sign in to your Existing account to continue
+                    Silahkan login dengan akun Anda
                     </p>
                   </div>
                   <div class="cover-image">

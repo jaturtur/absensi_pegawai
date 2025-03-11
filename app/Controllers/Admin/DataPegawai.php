@@ -9,22 +9,20 @@ use App\Models\UserModel;
 use App\Models\LokasiPresensiModel;
 use App\Models\JabatanModel;
 
-
 class DataPegawai extends BaseController
 {
 
     function __construct()
     {
-    helper(['url', 'form']);
+        helper(['url', 'form']);
     }
 
     public function index()
     {
-       
-       $pegawaiModel = new PegawaiModel();
+        $pegawaiModel = new PegawaiModel();
         $data = [
             'title' => 'Data Pegawai',
-            'pegawai' => $pegawaiModel->findAll(),
+            'pegawai' => $pegawaiModel->getPegawai(),
         ];
 
         return view('admin/data_pegawai/data_pegawai', $data);
@@ -104,34 +102,36 @@ class DataPegawai extends BaseController
                     'required' => "Lokasi presensi wajib dipilih"
                 ],
             ],
-           'foto' => [
-              'rules' => 'uploaded[foto]|max_size[foto,10240]|mime_in[foto,image/png,image/jpeg]',
-             'errors' => [
-             'uploaded' => "File foto wajib diupload",
-             'max_size' => "Ukuran foto melebihi 10MB",
+          'foto' => [
+            'rules' => 'uploaded[foto]|max_size[foto,5120]|mime_in[foto,image/png,image/jpeg]',
+            'errors' => [
+            'uploaded' => "File foto wajib diupload",
+            'max_size' => "Ukuran foto melebihi 5MB",
             'mime_in' => "Jenis file yang diizinkan hanya PNG atau JPEG"
-                 ],
-            ],
-
+                ],
+             ],
             'username' => [
             'rules' => 'required',
             'errors' => [
             'required' => "Username wajib diisi"
             ],
         ],
-                'password' => [
-                    'rules' => 'required',
-                    'errors' => [
-                    'required' => "Password wajib diisi"
-             ],
-        ],
-                  'konfirmasi_password' => [
+               'password' => [
+                'rules' => 'required|min_length[8]|regex_match[/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/]',
+                 'errors' => [
+                'required' => "Password wajib diisi",
+                'min_length' => "Password minimal 8 karakter",
+                'regex_match' => "Password harus mengandung huruf besar, huruf kecil, dan angka"
+                ],
+                ],
+            'konfirmasi_password' => [
                 'rules' => 'required|matches[password]',
                 'errors' => [
-                'required' => "Konfirmasi password wajib diisi",
-                'matches' => "Konfirmasi password tidak cocok"
-              ],
-        ] ,
+                    'required' => "Konfirmasi password wajib diisi",
+                    'matches' => "Konfirmasi password tidak cocok"
+                    ],
+                ],
+
         'role' => [
          'rules' => 'required',
          'errors' => [
@@ -200,12 +200,11 @@ class DataPegawai extends BaseController
       
     public function edit($id)
     {
-       
         $lokasi_presensi = new LokasiPresensiModel();
         $jabatan_model = new JabatanModel();
         $pegawaiModel = new PegawaiModel();
         $data = [
-            'title' => 'Tambah Pegawai',
+            'title' => 'Edit Pegawai',
             'pegawai' => $pegawaiModel->editPegawai($id),
             'lokasi_presensi' => $lokasi_presensi->findAll(),
             'jabatan' => $jabatan_model->orderBy('jabatan', 'ASC')->findAll(),
@@ -312,18 +311,18 @@ class DataPegawai extends BaseController
             'foto' => $nama_foto,
             ]);
 
-            if ($this->request->getPost('password') == '') {
+            $password = $this->request->getPost('password');
+            if ($password == '') {
                 $password = $this->request->getPost('password_lama');
-            } 
-            else {
-                $password = password_hash ($this->request->getPost('password'), PASSWORD_DEFAULT);
+            } else {
+                $password = password_hash($password, PASSWORD_DEFAULT);
             }
-            
 
             $userModel
             ->where('id_pegawai', $id)
             ->set([
                 'username' => $this->request->getPost('username'),
+                'password' => $password,
                 'status' => $this->request->getPost('status'),
                 'role' => $this->request->getPost('role'),
             ])
