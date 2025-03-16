@@ -29,37 +29,37 @@
                         $file_url = base_url('file_ketidakhadiran/' . $ketidakhadiran['file']);
                         ?>
                         
-                        <?php if (in_array($file_ext, ['pdf', 'doc', 'docx'])) : ?>
-                            <a class="btn btn-light border p-2 rounded shadow-sm" 
-                               href="<?= ($file_ext == 'pdf') 
-                                        ? $file_url 
-                                        : 'https://docs.google.com/gview?url=' . urlencode($file_url) . '&embedded=true'; ?>" 
-                               target="_blank" 
-                               style="text-decoration: none; transition: 0.3s;">
-                               <i class="fa-solid fa-eye"></i> 
-                            </a>
-                            
-                            <a class="btn btn-light border p-2 rounded shadow-sm" 
-                               href="<?= $file_url ?>" download 
-                               style="text-decoration: none; transition: 0.3s;">
-                               <i class="fa-solid fa-download"></i>
-                            </a>
-                        <?php else : ?>
-                            <a class="badge bg-warning text-dark border p-2 rounded shadow-sm" 
-                               href="<?= $file_url ?>" download 
-                               style="text-decoration: none; transition: 0.3s;">
-                               <i class="fa-solid fa-file"></i> Unduh
-                            </a>
-                        <?php endif; ?>
-                    </td>
-                    <td class="text-center align-middle">
-                        <?php if ($ketidakhadiran['status'] == 'Menunggu') : ?>
-                            <span class="badge bg-warning text-dark p-2 rounded shadow-sm"><i class="fa-solid fa-hourglass-half"></i> Menunggu</span>
-                        <?php elseif ($ketidakhadiran['status'] == 'Setuju') : ?>
-                            <span class="badge bg-success text-white p-2 rounded shadow-sm"><i class="fa-solid fa-circle-check"></i> Setuju</span>
-                        <?php else : ?>
-                            <span class="badge bg-danger text-white p-2 rounded shadow-sm"><i class="fa-solid fa-circle-xmark"></i> Ditolak</span>
-                        <?php endif; ?>
+                        <?php if (in_array($file_ext, ['pdf', 'doc', 'docx', 'png', 'jpg', 'jpeg'])) : ?>
+    <a class="btn btn-light border p-2 rounded shadow-sm" 
+       href="<?= (in_array($file_ext, ['doc', 'docx'])) 
+                ? 'https://docs.google.com/gview?url=' . urlencode($file_url) . '&embedded=true' 
+                : $file_url; ?>" 
+       target="_blank" 
+       style="text-decoration: none; transition: 0.3s;">
+       <i class="fa-solid fa-eye"></i> 
+    </a>
+    
+    <a class="btn btn-light border p-2 rounded shadow-sm" 
+       href="<?= $file_url ?>" download 
+       style="text-decoration: none; transition: 0.3s;">
+       <i class="fa-solid fa-download"></i>
+    </a>
+<?php else : ?>
+    <a class="badge bg-warning text-dark border p-2 rounded shadow-sm" 
+       href="<?= $file_url ?>" download 
+       style="text-decoration: none; transition: 0.3s;">
+       <i class="fa-solid fa-file"></i> Unduh
+    </a>
+<?php endif; ?>
+</td>
+<td class="text-center align-middle">
+    <?php if ($ketidakhadiran['status'] == 'Menunggu') : ?>
+        <span class="badge bg-warning text-dark p-2 rounded shadow-sm"><i class="fa-solid fa-hourglass-half"></i> Menunggu</span>
+    <?php elseif ($ketidakhadiran['status'] == 'Setuju') : ?>
+        <span class="badge bg-success text-white p-2 rounded shadow-sm"><i class="fa-solid fa-circle-check"></i> Setuju</span>
+    <?php else : ?>
+        <span class="badge bg-danger text-white p-2 rounded shadow-sm"><i class="fa-solid fa-circle-xmark"></i> Ditolak</span>
+    <?php endif; ?>
                     </td>
                     <td class="text-center align-middle">
                         <?php if ($ketidakhadiran['status'] == 'Menunggu') : ?>
@@ -72,7 +72,7 @@
                                <i class="fa-solid fa-xmark"></i> Tolak
                             </a>
                         <?php else : ?>
-                            <i class="text-secondary">Selesai</i>
+                            <i class="text">Selesai</i>
                         <?php endif; ?>
                     </td>
                 </tr>

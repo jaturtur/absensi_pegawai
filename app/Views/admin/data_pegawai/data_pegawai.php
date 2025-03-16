@@ -2,7 +2,10 @@
 
 <?= $this->section('content') ?>
 
-<a href="<?=base_url('admin/data_pegawai/create')?>" class="btn btn-primary">Tambah Data</a>
+<a href="<?= base_url('admin/data_pegawai/create') ?>" class="btn btn-primary">
+    <i class="fas fa-plus"></i>
+    Tambah
+</a>
 <table class="table table-striped" id="datatables">
     <thead>
         <tr>
@@ -25,26 +28,27 @@
                 <td class="text-center"><?= $peg['jabatan'] ?></td>
                 <td class="text-center"><?= $peg['nama_lokasi'] ?></td>
                 <td class="text-center">
-                <div>
-                         <a href="<?= base_url('admin/data_pegawai/detail/'). $peg['id'] ?>" 
-                             class="badge bg-success" 
-                             style="display: inline-block; min-width: 90px; padding: 10px 0; text-align: center;">
-                                    Detail
-                            </a>
+    <div>
+        <a href="<?= base_url('admin/data_pegawai/detail/'). $peg['id'] ?>" 
+            class="btn btn-success btn-sm" 
+            style="padding: 6px 10px;">
+            <i class="fas fa-eye"></i>
+        </a>
 
-                            <a href="<?= base_url('admin/data_pegawai/edit/'). $peg['id'] ?>" 
-                                     class="badge bg-warning" 
-                                     style="display: inline-block; min-width: 90px; padding: 10px 0; text-align: center;">
-                                      Edit
-                                </a>
+        <a href="<?= base_url('admin/data_pegawai/edit/'). $peg['id'] ?>" 
+            class="btn btn-warning btn-sm" 
+            style="padding: 6px 10px;">
+            <i class="fas fa-edit"></i>
+        </a>
 
-                            <a href="<?= base_url('admin/data_pegawai/delete/'). $peg['id'] ?>" 
-                                     class="badge bg-danger tombol-hapus" 
-                                    style="display: inline-block; min-width: 90px; padding: 10px 0; text-align: center;">
-                                     Hapus
-                            </a>
-                </div>
-                </td>
+        <a href="<?= base_url('admin/data_pegawai/delete/'). $peg['id'] ?>" 
+            class="btn btn-danger btn-sm tombol-hapus" 
+            style="padding: 6px 10px;">
+            <i class="fas fa-trash"></i>
+        </a>
+    </div>
+</td>
+
             </tr>
         <?php endforeach ;?>
         </tbody>

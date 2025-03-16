@@ -42,6 +42,7 @@ $routes->get('admin/rekap_bulanan', 'Admin\RekapPresensi::rekap_bulanan', ['filt
 $routes->get('admin/ketidakhadiran', 'Admin\Ketidakhadiran::index', ['filter' => 'adminFilter']);
 $routes->get('admin/setuju_ketidakhadiran/(:segment)', 'Admin\Ketidakhadiran::setuju/$1', ['filter' => 'adminFilter']);
 $routes->get('admin/tolak_ketidakhadiran/(:segment)', 'Admin\Ketidakhadiran::tolak/$1', ['filter' => 'adminFilter']);
+$routes->get('admin/delete_ketidakhadiran/delete/(:segment)', 'Admin\Ketidakhadiran::delete/$1', ['filter' => 'adminFilter']);
 
 
 //bagian pegawai 

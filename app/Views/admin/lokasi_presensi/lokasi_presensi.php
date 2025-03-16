@@ -23,26 +23,24 @@
                 <td class="text-center"><?= $lok ['alamat_lokasi'] ?></td>
                 <td class="text-center"><?= $lok ['tipe_lokasi'] ?></td>
                 <td class="text-center">
-                <div>
-                <a href="<?= base_url('admin/lokasi_presensi/detail/'). $lok['id'] ?>" 
-                 class="badge bg-success" 
-                style="display: block; min-width: 120px; padding: 12px 0; text-align: center; margin-bottom: 8px; border-radius: 8px;">
-                    Detail
-                    </a>        
-
-                <a href="<?= base_url('admin/lokasi_presensi/edit/'). $lok['id'] ?>" 
-                    class="badge bg-warning" 
-                    style="display: block; min-width: 120px; padding: 12px 0; text-align: center; margin-bottom: 8px; border-radius: 8px;">
-                 Edit
-                    </a>
-
-            <a href="<?= base_url('admin/lokasi_presensi/delete/'). $lok['id'] ?>" 
-                    class="badge bg-danger tombol-hapus" 
-             style="display: block; min-width: 120px; padding: 12px 0; text-align: center; border-radius: 8px;">
-             Hapus
-            </a>
-                </div>
-                </td>
+    <div class="d-flex justify-content-center gap-2">
+        <a href="<?= base_url('admin/lokasi_presensi/detail/'). $lok['id'] ?>" 
+            class="btn btn-success btn-sm" 
+            style="padding: 6px 10px; border-radius: 6px;">
+            <i class="fas fa-eye"></i>
+        </a>        
+        <a href="<?= base_url('admin/lokasi_presensi/edit/'). $lok['id'] ?>" 
+            class="btn btn-warning btn-sm" 
+            style="padding: 6px 10px; border-radius: 6px;">
+            <i class="fas fa-edit"></i>
+        </a>
+        <a href="<?= base_url('admin/lokasi_presensi/delete/'). $lok['id'] ?>" 
+            class="btn btn-danger btn-sm tombol-hapus" 
+            style="padding: 6px 10px; border-radius: 6px;">
+            <i class="fas fa-trash"></i>
+        </a>
+    </div>
+</td>
             </tr>
         <?php endforeach ;?>
         </tbody>

@@ -43,4 +43,16 @@ class Ketidakhadiran extends BaseController
     
         return redirect()->to(base_url('admin/ketidakhadiran'));
     }
+
+    function delete($id)
+    {
+        $ketidakhadiranModel = new KetidakhadiranModel();
+        $ketidakhadiran = $ketidakhadiranModel->find($id);
+        if ($ketidakhadiran) {
+            $ketidakhadiranModel->where('id_pegawai', $id)->delete();
+            $ketidakhadiranModel->delete($id);
+            session()->setFlashData('berhasil', 'Data ketidakhadiran berhasil dihapus');
+        }
+        return redirect()->to(base_url('admin/ketidakhadiran'));
+    }
 }

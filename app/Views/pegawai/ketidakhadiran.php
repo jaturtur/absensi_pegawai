@@ -2,9 +2,6 @@
 
 <?= $this->section('content') ?>
 
-
-
-
 <a href="<?= base_url('pegawai/ketidakhadiran/create') ?>" class="btn btn-primary"><i class="lni lni-circle-plus"></i> Ajukan</a>
 
 <table class="table table-striped" id="datatables">

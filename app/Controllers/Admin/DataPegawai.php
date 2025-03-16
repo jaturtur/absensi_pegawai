@@ -57,7 +57,7 @@ class DataPegawai extends BaseController
     {
         $pegawaiModel = new PegawaiModel();
         $pegawaiTerakhir = $pegawaiModel->select('nip')->orderBy('id', 'DESC')->first();
-        $nipTerakhir = $pegawaiTerakhir ? $pegawaiTerakhir['nip'] : 'SAL-0000';
+        $nipTerakhir = $pegawaiTerakhir ? $pegawaiTerakhir['nip'] : 'EUS-0000';
         $angkaNIP = (int) substr($nipTerakhir, 4);
         $angkaNIP++;
         return 'SAL-'.str_pad($angkaNIP, 4, '0', STR_PAD_LEFT);
