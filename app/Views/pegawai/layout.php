@@ -17,6 +17,9 @@
     <!--!===== Tabler ICON =====-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/1.35.0/iconfont/tabler-icons.min.css" integrity="sha512-tpsEzNMLQS7w9imFSjbeOHdZav3/a0bSESAL1y5jyJDoICFF2YwEdAHOPdOr1t+h8hTzar0flphxR76pd0V1zQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+         <!--!===== Sweetalert =====-->
+         <link rel="stylesheet" href="https://cdn.datatables.net/2.2.1/css/dataTables.dataTables.css" />
+         
      <!--!===== Leaflea CSS =====-->
      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
@@ -60,11 +63,18 @@
             </a>
           </li>
           <li class="nav-item mb-2">
-          <a
-              href="<?= base_url('pegawai/rekap_presensi') ?>"  >
+          <a href="<?= base_url('pegawai/rekap_presensi') ?>"  >
+
             <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-report-analytics"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" /><path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /><path d="M9 17v-5" /><path d="M12 17v-1" /><path d="M15 17v-3" /></svg>
               <span class="text">Rekap Presensi</span>
             </a>
+            </a>
+          </li>
+          <li class="nav-item mb-2">
+
+            <a href="<?= base_url('pegawai/logbook') ?>">
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-notebook"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-11a1 1 0 0 1 -1 -1v-14a1 1 0 0 1 1 -1m3 0v18" /><path d="M13 8l2 0" /><path d="M13 12l2 0" /></svg>
+              <span class="text">Logbook</span>
             </a>
           </li>
           <li class="nav-item mb-2">
@@ -193,10 +203,21 @@
      <!--!===== Sweetalert =====-->
      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+
+     <!-- Jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+     integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!--!===== datatables =====-->
+    <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
+
+
          <!--!===== datatables =====-->
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
 
     
+
 
 
     <script>
