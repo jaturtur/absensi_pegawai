@@ -26,6 +26,7 @@
 <table class="table table-striped table-bordered">
     <tr>
         <th class="text-center">No</th>
+        <th class="text-center">NIP</th>
         <th class="text-center">Nama Pegawai</th>
         <th class="text-center">Tanggal</th>
         <th class="text-center">Jam masuk</th>
@@ -59,6 +60,7 @@
         ?>
      <tr>
             <td class="text-center"><?= $no++ ?></td>
+            <td class="text-center"><?= $rekap['nip'] ?></td>
             <td class="text-center"><?= $rekap['nama'] ?></td>
             <td class="text-center"><?= date('d F Y', strtotime($rekap['tanggal_masuk'])) ?></td>
             <td class="text-center"><?= $rekap['jam_masuk'] ?></td>

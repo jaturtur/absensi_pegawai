@@ -64,113 +64,113 @@ class DataPegawai extends BaseController
     }
 
     public function store()
-    {
-        $rules = [
-             'nama' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => "Nama wajib diisi"
-                ],
-            ],
-            'jenis_kelamin' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => "Jenis kelamin wajib dipilih"
-                ],
-            ],
-            'alamat' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => "Alamat wajib diisi"
-                ],
-            ],
-            'no_handphone' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => "No. handphone wajib diisi"
-                ],
-            ],
-            'jabatan' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => "Jabatan wajib dipilih"
-                ],
-            ],
-            'lokasi_presensi' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => "Lokasi presensi wajib dipilih"
-                ],
-            ],
-          'foto' => [
-            'rules' => 'uploaded[foto]|max_size[foto,5120]|mime_in[foto,image/png,image/jpeg]',
-            'errors' => [
-            'uploaded' => "File foto wajib diupload",
-            'max_size' => "Ukuran foto melebihi 5MB",
-            'mime_in' => "Jenis file yang diizinkan hanya PNG atau JPEG"
-                ],
-             ],
-            'username' => [
+{
+    $rules = [
+        'nama' => [
             'rules' => 'required',
             'errors' => [
-            'required' => "Username wajib diisi"
+                'required' => "Nama wajib diisi"
             ],
         ],
-               'password' => [
-                'rules' => 'required|min_length[8]|regex_match[/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/]',
-                 'errors' => [
+        'jenis_kelamin' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => "Jenis kelamin wajib dipilih"
+            ],
+        ],
+        'alamat' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => "Alamat wajib diisi"
+            ],
+        ],
+        'no_handphone' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => "No. handphone wajib diisi"
+            ],
+        ],
+        'jabatan' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => "Jabatan wajib dipilih"
+            ],
+        ],
+        'lokasi_presensi' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => "Lokasi presensi wajib dipilih"
+            ],
+        ],
+        'foto' => [
+            'rules' => 'uploaded[foto]|max_size[foto,5120]|mime_in[foto,image/png,image/jpeg]',
+            'errors' => [
+                'uploaded' => "File foto wajib diupload",
+                'max_size' => "Ukuran foto melebihi 5MB",
+                'mime_in' => "Jenis file yang diizinkan hanya PNG atau JPEG"
+            ],
+        ],
+        'username' => [
+            'rules' => 'required|is_unique[users.username]',
+            'errors' => [
+                'required' => "Username wajib diisi",
+                'is_unique' => "Username sudah digunakan, silakan pilih username lain"
+            ],
+        ],
+        'password' => [
+            'rules' => 'required|min_length[8]|regex_match[/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/]',
+            'errors' => [
                 'required' => "Password wajib diisi",
                 'min_length' => "Password minimal 8 karakter",
                 'regex_match' => "Password harus mengandung huruf besar, huruf kecil, dan angka"
-                ],
-                ],
-            'konfirmasi_password' => [
-                'rules' => 'required|matches[password]',
-                'errors' => [
-                    'required' => "Konfirmasi password wajib diisi",
-                    'matches' => "Konfirmasi password tidak cocok"
-                    ],
-                ],
-
-        'role' => [
-         'rules' => 'required',
-         'errors' => [
-            'required' => "Role wajib diisi"
-          ],
+            ],
         ],
+        'konfirmasi_password' => [
+            'rules' => 'required|matches[password]',
+            'errors' => [
+                'required' => "Konfirmasi password wajib diisi",
+                'matches' => "Konfirmasi password tidak cocok"
+            ],
+        ],
+        'role' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => "Role wajib diisi"
+            ],
+        ],
+    ];
 
+    if (!$this->validate($rules)) {
+        $lokasi_presensi = new LokasiPresensiModel();
+        $jabatan_model = new JabatanModel();
+
+        $data = [
+            'title' => 'Tambah Pegawai',
+            'lokasi_presensi' => $lokasi_presensi->findAll(),
+            'jabatan' => $jabatan_model->orderBy('jabatan', 'ASC')->findAll(),
+            'validation' => \Config\Services::validation(),
+            'input' => $this->request->getPost() // Menyimpan input untuk dipertahankan
         ];
+        echo view('admin/data_pegawai/create', $data);
+    } else {
+        $pegawaiModel = new PegawaiModel();
+        $nipBaru = $this->generateNIP();
 
-        if (!$this->validate($rules)) {
+        $foto = $this->request->getFile('foto');
+        $nama_foto = ($foto->getError() == 4) ? '' : $foto->getRandomName();
 
-            $lokasi_presensi = new LokasiPresensiModel();
-            $jabatan_model = new JabatanModel();
-            $data = [
-                'title' => 'Tambah Pegawai',
-                'lokasi_presensi' => $lokasi_presensi->findAll(),
-                'jabatan' => $jabatan_model->orderBy('jabatan', 'ASC')->findAll(),
-                'validation' => \Config\Services::validation()
-            ];
-            echo view('admin/data_pegawai/create', $data);
+        if ($nama_foto) {
+            $foto->move('profile', $nama_foto);
+        }
 
-        } else {
-           $pegawaiModel = new PegawaiModel();
-           $nipBaru = $this->generateNIP();
-       
+        // Cek apakah username sudah ada di database
+        $userModel = new UserModel();
+        $existingUser = $userModel->where('username', $this->request->getPost('username'))->first();
+        if ($existingUser) {
+            return redirect()->back()->withInput()->with('error', 'Username sudah digunakan, silakan pilih yang lain.');
+        }
 
-           $foto = $this->request->getFile('foto');
-
-           if ($foto->getError() == 4) {
-            $nama_foto = '';
-             } else {
-                  $nama_foto = $foto->getRandomName();
-                  $foto->move('profile', $nama_foto);
-             }
-
-          
-          
-           $pegawaiModel = new PegawaiModel();
-           $pegawaiModel->insert([
+        $pegawaiModel->insert([
             'nip' => $nipBaru,
             'nama' => $this->request->getPost('nama'),
             'jenis_kelamin' => $this->request->getPost('jenis_kelamin'),
@@ -179,25 +179,24 @@ class DataPegawai extends BaseController
             'jabatan' => $this->request->getPost('jabatan'),
             'lokasi_presensi' => $this->request->getPost('lokasi_presensi'),
             'foto' => $nama_foto,
-            ]);
-            $id_pegawai = $pegawaiModel->insertID();
-           
-            $userModel = new UserModel();
-            $userModel->insert([
+        ]);
+
+        $id_pegawai = $pegawaiModel->insertID();
+
+        $userModel->insert([
             'id_pegawai' => $id_pegawai,
             'username' => $this->request->getPost('username'),
             'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
             'status' => 'Aktif',
             'role' => $this->request->getPost('role')
-            ]);
+        ]);
 
-            session()->setFlashdata('berhasil', 'Data pegawai berhasil tersimpan');
-
-            return redirect()->to(base_url('admin/data_pegawai'));
-        }
+        session()->setFlashdata('berhasil', 'Data pegawai berhasil tersimpan');
+        return redirect()->to(base_url('admin/data_pegawai'));
     }
 
-      
+
+}
     public function edit($id)
     {
         $lokasi_presensi = new LokasiPresensiModel();

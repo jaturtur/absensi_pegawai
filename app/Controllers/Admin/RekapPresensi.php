@@ -23,7 +23,7 @@ $spreadsheet = new Spreadsheet();
 $activeWorksheet = $spreadsheet->getActiveSheet();
 
 // Menggabungkan sel untuk judul
-$activeWorksheet->mergeCells('A1:H1');
+$activeWorksheet->mergeCells('A1:I1');
 $activeWorksheet->mergeCells('A3:B3');
 $activeWorksheet->mergeCells('C3:E3');
 
@@ -56,14 +56,15 @@ $styleArrayHeader = [
 $activeWorksheet->setCellValue('A3', 'TANGGAL');
 $activeWorksheet->setCellValue('C3', $filter_tanggal);
 $activeWorksheet->setCellValue('A4', 'NO');
-$activeWorksheet->setCellValue('B4', 'NAMA PEGAWAI');
-$activeWorksheet->setCellValue('C4', 'TANGGAL MASUK');
-$activeWorksheet->setCellValue('D4', 'JAM MASUK');
-$activeWorksheet->setCellValue('E4', 'TANGGAL KELUAR');
-$activeWorksheet->setCellValue('F4', 'JAM KELUAR');
-$activeWorksheet->setCellValue('G4', 'TOTAL JAM KERJA');
-$activeWorksheet->setCellValue('H4', 'TOTAL TERLAMBAT');
-$activeWorksheet->getStyle('A4:H4')->applyFromArray($styleArrayHeader);
+$activeWorksheet->setCellValue('B4', 'NIP');
+$activeWorksheet->setCellValue('C4', 'NAMA PEGAWAI');
+$activeWorksheet->setCellValue('D4', 'TANGGAL MASUK');
+$activeWorksheet->setCellValue('E4', 'JAM MASUK');
+$activeWorksheet->setCellValue('F4', 'TANGGAL KELUAR');
+$activeWorksheet->setCellValue('G4', 'JAM KELUAR');
+$activeWorksheet->setCellValue('H4', 'TOTAL JAM KERJA');
+$activeWorksheet->setCellValue('I4', 'TOTAL TERLAMBAT');
+$activeWorksheet->getStyle('A4:I4')->applyFromArray($styleArrayHeader);
 
 $rows = 5;
 $no = 1;
@@ -83,16 +84,17 @@ foreach ($rekap_harian as $rekap) {
     $menit_terlambat = floor(($selisih_terlambat % 3600) / 60);
 
     $activeWorksheet->setCellValue('A' . $rows, $no++);
-    $activeWorksheet->setCellValue('B' . $rows, $rekap['nama']);
-    $activeWorksheet->setCellValue('C' . $rows, $rekap['tanggal_masuk']);
-    $activeWorksheet->setCellValue('D' . $rows, $rekap['jam_masuk']);
-    $activeWorksheet->setCellValue('E' . $rows, $rekap['tanggal_keluar']);
-    $activeWorksheet->setCellValue('F' . $rows, $rekap['jam_keluar']);
-    $activeWorksheet->setCellValue('G' . $rows, $jam . ' jam ' . $menit . ' menit');
-    $activeWorksheet->setCellValue('H' . $rows, $jam_terlambat . ' jam ' . $menit_terlambat . ' menit');
+    $activeWorksheet->setCellValue('B' . $rows, $rekap['nip']);
+    $activeWorksheet->setCellValue('C' . $rows, $rekap['nama']);
+    $activeWorksheet->setCellValue('D' . $rows, $rekap['tanggal_masuk']);
+    $activeWorksheet->setCellValue('E' . $rows, $rekap['jam_masuk']);
+    $activeWorksheet->setCellValue('F' . $rows, $rekap['tanggal_keluar']);
+    $activeWorksheet->setCellValue('G' . $rows, $rekap['jam_keluar']);
+    $activeWorksheet->setCellValue('H' . $rows, $jam . ' jam ' . $menit . ' menit');
+    $activeWorksheet->setCellValue('I' . $rows, $jam_terlambat . ' jam ' . $menit_terlambat . ' menit');
 
     // Menambahkan border ke setiap baris
-    $activeWorksheet->getStyle('A' . $rows . ':H' . $rows)->applyFromArray([
+    $activeWorksheet->getStyle('A' . $rows . ':I' . $rows)->applyFromArray([
         'borders' => [
             'allBorders' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN]
         ]
@@ -101,7 +103,7 @@ foreach ($rekap_harian as $rekap) {
 }
 
 // Mengatur ukuran kolom agar otomatis menyesuaikan
-foreach (range('A', 'H') as $columnID) {
+foreach (range('A', 'I') as $columnID) {
     $activeWorksheet->getColumnDimension($columnID)->setAutoSize(true);
 }
 
@@ -143,7 +145,7 @@ exit();
             $activeWorksheet = $spreadsheet->getActiveSheet();
 
             // Menggabungkan sel untuk judul
-            $activeWorksheet->mergeCells('A1:H1');
+            $activeWorksheet->mergeCells('A1:I1');
             $activeWorksheet->mergeCells('A3:B3');
             $activeWorksheet->mergeCells('C3:E3');
 
@@ -158,7 +160,7 @@ exit();
             ];
             
             $activeWorksheet->setCellValue('A1', 'REKAP PRESENSI BULANAN');
-            $activeWorksheet->getStyle('A1:H1')->applyFromArray($styleArrayJudul);
+            $activeWorksheet->getStyle('A1:I1')->applyFromArray($styleArrayJudul);
 
             // Mengatur teks header tabel
             $styleArrayHeader = [
@@ -177,14 +179,15 @@ exit();
             $activeWorksheet->setCellValue('A3', 'BULAN');
             $activeWorksheet->setCellValue('C3',date('F Y', strtotime($filter_tahun . '-' . $filter_bulan)));
             $activeWorksheet->setCellValue('A4', 'NO');
-            $activeWorksheet->setCellValue('B4', 'NAMA PEGAWAI');
-            $activeWorksheet->setCellValue('C4', 'TANGGAL MASUK');
-            $activeWorksheet->setCellValue('D4', 'JAM MASUK');
-            $activeWorksheet->setCellValue('E4', 'TANGGAL KELUAR');
-            $activeWorksheet->setCellValue('F4', 'JAM KELUAR');
-            $activeWorksheet->setCellValue('G4', 'TOTAL JAM KERJA');
-            $activeWorksheet->setCellValue('H4', 'TOTAL TERLAMBAT');
-            $activeWorksheet->getStyle('A4:H4')->applyFromArray($styleArrayHeader);
+            $activeWorksheet->setCellValue('B4', 'NIP');
+            $activeWorksheet->setCellValue('C4', 'NAMA PEGAWAI');
+            $activeWorksheet->setCellValue('D4', 'TANGGAL MASUK');
+            $activeWorksheet->setCellValue('E4', 'JAM MASUK');
+            $activeWorksheet->setCellValue('F4', 'TANGGAL KELUAR');
+            $activeWorksheet->setCellValue('G4', 'JAM KELUAR');
+            $activeWorksheet->setCellValue('H4', 'TOTAL JAM KERJA');
+            $activeWorksheet->setCellValue('I4', 'TOTAL TERLAMBAT');
+            $activeWorksheet->getStyle('A4:I4')->applyFromArray($styleArrayHeader);
 
             $rows = 5;
             $no = 1;
@@ -202,15 +205,16 @@ exit();
                 $menit_terlambat = floor(($selisih_terlambat % 3600) / 60);
 
                 $activeWorksheet->setCellValue('A' . $rows, $no++);
-                $activeWorksheet->setCellValue('B' . $rows, $rekap['nama']);
-                $activeWorksheet->setCellValue('C' . $rows, $rekap['tanggal_masuk']);
-                $activeWorksheet->setCellValue('D' . $rows, $rekap['jam_masuk']);
-                $activeWorksheet->setCellValue('E' . $rows, $rekap['tanggal_keluar']);
-                $activeWorksheet->setCellValue('F' . $rows, $rekap['jam_keluar']);
-                $activeWorksheet->setCellValue('G' . $rows, $jam . ' jam ' . $menit . ' menit');
-                $activeWorksheet->setCellValue('H' . $rows, $jam_terlambat . ' jam ' . $menit_terlambat . ' menit');
+                $activeWorksheet->setCellValue('B' . $rows, $rekap['nip']);
+                $activeWorksheet->setCellValue('C' . $rows, $rekap['nama']);
+                $activeWorksheet->setCellValue('D' . $rows, $rekap['tanggal_masuk']);
+                $activeWorksheet->setCellValue('E' . $rows, $rekap['jam_masuk']);
+                $activeWorksheet->setCellValue('F' . $rows, $rekap['tanggal_keluar']);
+                $activeWorksheet->setCellValue('G' . $rows, $rekap['jam_keluar']);
+                $activeWorksheet->setCellValue('H' . $rows, $jam . ' jam ' . $menit . ' menit');
+                $activeWorksheet->setCellValue('I' . $rows, $jam_terlambat . ' jam ' . $menit_terlambat . ' menit');
                 
-                $activeWorksheet->getStyle('A' . $rows . ':H' . $rows)->applyFromArray([
+                $activeWorksheet->getStyle('A' . $rows . ':I' . $rows)->applyFromArray([
                     'borders' => [
                         'allBorders' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN]
                     ]
@@ -219,7 +223,7 @@ exit();
             }
 
             // Mengatur ukuran kolom
-            foreach (range('A', 'H') as $columnID) {
+            foreach (range('A', 'I') as $columnID) {
                 $activeWorksheet->getColumnDimension($columnID)->setAutoSize(true);
             }
 
