@@ -89,5 +89,39 @@ public function rekap_presensi_pegawai()
         return $builder->get()->getResultArray();
     }
 
+
+    public function cek_status_presensi($id_pegawai)
+{
+    $db = \Config\Database::connect();
+    $builder = $db->table('presensi');
+    $builder->select('presensi.*, lokasi_presensi.jam_pulang as jam_pulang_kantor');
+    $builder->join('pegawai', 'pegawai.id = presensi.id_pegawai');
+    $builder->join('lokasi_presensi', 'lokasi_presensi.id = pegawai.lokasi_presensi');
+    $builder->where('presensi.id_pegawai', $id_pegawai);
+    $builder->where('tanggal_masuk', date('Y-m-d'));
+    $presensi = $builder->get()->getRowArray();
+
+    if ($presensi) {
+        $jam_pulang_kantor = $presensi['jam_pulang_kantor'];
+        $jam_sekarang = date('H:i:s');
+
+        if ($presensi['jam_keluar'] == null && $jam_sekarang >= $jam_pulang_kantor) {
+            // Jika belum absen keluar dan waktu sudah melewati jam pulang, otomatis absen keluar
+            $data = [
+                'tanggal_keluar' => date('Y-m-d'),
+                'jam_keluar' => $jam_sekarang
+            ];
+            $this->presensi_keluar($id_pegawai, $data);
+            return 'Presensi keluar otomatis dilakukan.';
+        } elseif ($presensi['jam_keluar'] != null && $jam_sekarang >= $jam_pulang_kantor) {
+            // Jika sudah absen keluar, pegawai harus absen masuk lagi
+            return 'Harus absen masuk kembali.';
+        }
+    }
+
+    return 'Belum waktunya absen keluar.';
+}
+
+
    
 }

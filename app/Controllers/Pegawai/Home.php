@@ -192,6 +192,8 @@ class Home extends BaseController
 
     session()->setFlashData('berhasil', 'Absen keluar berhasil');
 
+    
+
     // Jika request berasal dari AJAX, kirim response JSON
     if ($request->isAJAX()) {
         return $this->response->setJSON(['status' => 'success', 'message' => 'Absen keluar berhasil']);

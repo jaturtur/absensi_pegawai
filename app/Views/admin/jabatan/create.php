@@ -11,6 +11,7 @@
            <div class="invalid-feedback"><?= $validation->getError('jabatan') ?></div>
           </div>
           <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+          <a href="<?= base_url('admin/jabatan') ?>"class="btn btn-secondary btn-sm">Kembali</a>
          </div>
       </form>
      </div>

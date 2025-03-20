@@ -56,8 +56,10 @@
         <td>:</td>
         <td><?= $pegawai['role'] ?></td>
       </tr>
+      
     </table>
-  </di>
+    <a href="<?= base_url('admin/data_pegawai') ?>"class="btn btn-secondary btn-sm">Kembali</a>
+  </div>
 </div>
 
 <?= $this->endSection() ?>

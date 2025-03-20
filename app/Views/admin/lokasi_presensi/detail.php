@@ -16,7 +16,7 @@
 <div class="row">
     <div class="col-md-6">
     <div class="card ">
-  <di class="card-body">
+  <div class="card-body">
     <table class="table">
       <tr>
         <td>Nama Lokasi</td>
@@ -64,7 +64,8 @@
         <td><?= $lokasi_presensi['jam_keluar'] ?></td>
       </tr>
     </table>
-  </di>
+    <a href="<?= base_url('admin/lokasi_presensi') ?>"class="btn btn-secondary btn-sm">Kembali</a>
+  </div>
 </div>
     </div>
     <div class="col-md-6">

@@ -106,6 +106,7 @@
         
 
           <button type="submit" class="btn btn-primary btn-sm">Update</button>
+          <a href="<?= base_url('admin/data_pegawai') ?>"class="btn btn-secondary btn-sm">Kembali</a>
          </div>
       </form>
      </div>

@@ -21,4 +21,6 @@ class LokasiPresensiModel extends Model
         'jam_keluar'
     ];
 
+    
+
 }

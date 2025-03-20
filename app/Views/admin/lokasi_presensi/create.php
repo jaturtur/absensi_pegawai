@@ -67,6 +67,7 @@
           </div>
 
           <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+          <a href="<?= base_url('admin/lokasi_presensi') ?>"class="btn btn-secondary btn-sm">Kembali</a>
          </div>
       </form>
      </div>
